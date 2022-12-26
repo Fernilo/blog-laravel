@@ -32,11 +32,11 @@ class PostController extends Controller
     {
         $posts = Post::where([
             ['categoria_id' , $categoria->id], 
-            ['estado' , 2],
+            ['estado' , 2]
         ])
         ->latest('id')
         ->paginate(6);
 
-        return view('post.categoria' , compact('posts'));
+        return view('posts.categoria' , compact('posts','categoria'));
     }
 }
