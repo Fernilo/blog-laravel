@@ -7,14 +7,15 @@ use Illuminate\View\Component;
 
 class Cards extends Component
 {
+    public $post;//propiedad del tipo publico
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($post)
     {
-        //
+        $this->post = $post;//Accesible por cualquier método del componente
     }
 
     /**
@@ -24,7 +25,6 @@ class Cards extends Component
      */
     public function render()
     {
-        $posts = Post::where('estado' , 2)->latest('id')->paginate(8);
-        return view('components.cards',compact('posts'));
+        return view('components.cards');
     }
 }
