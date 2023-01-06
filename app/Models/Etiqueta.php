@@ -10,6 +10,6 @@ class Etiqueta extends Model
     use HasFactory;
 
     public function posts() {
-        return $this->belongsToMany(Etiqueta::class , 'posts_etiquetas' , 'etiqueta_id' , 'post_id');
+        return $this->belongsToMany(Post::class , 'posts_etiquetas' , 'etiqueta_id' , 'post_id');
     }
 }

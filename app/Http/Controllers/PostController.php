@@ -43,6 +43,7 @@ class PostController extends Controller
 
     public function etiqueta(Etiqueta $etiqueta) 
     {
-        return $etiqueta->posts()->where('posts.estado' , 2)->get();
+        $posts = $etiqueta->posts()->where('estado' , 2)->latest('id')->paginate(4);
+        return  view('posts.etiqueta', compact('posts','etiqueta'));
     }
 }

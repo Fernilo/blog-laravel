@@ -3,7 +3,7 @@
     <div class="card-img-overlay">
         @foreach ($post->etiquetas as $etiqueta)
             <div class="px-3 text-secondary badge" style="background-color: {{ $etiqueta->color }}">
-                {{ $etiqueta->nombre }}
+                <a style="text-decoration: none;" class="link-secondary" href="{{ route('post.etiqueta' , $etiqueta) }}}">{{ $etiqueta->nombre }}</a>
             </div>
         @endforeach
         <div class="mt-5">
