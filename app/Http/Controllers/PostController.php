@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Etiqueta;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -35,8 +36,13 @@ class PostController extends Controller
             ['estado' , 2]
         ])
         ->latest('id')
-        ->paginate(6);
+        ->paginate(4);
 
         return view('posts.categoria' , compact('posts','categoria'));
+    }
+
+    public function etiqueta(Etiqueta $etiqueta) 
+    {
+        return $etiqueta->posts()->where('posts.estado' , 2)->get();
     }
 }

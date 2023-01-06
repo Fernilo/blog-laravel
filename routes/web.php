@@ -27,4 +27,7 @@ Route::get('/dashboard', function () {
 Route::get('/categoria/{categoria}' , [PostController::class , 'categoria'])
     ->name('post.categoria');
 
+Route::get('/etiqueta/{etiqueta}' , [PostController::class , 'etiqueta'])
+    ->name('post.etiqueta');
+
 require __DIR__.'/auth.php';

@@ -6,7 +6,15 @@
         <h1 class="text-center text-uppercase mt-2">Categoría:{{$categoria->nombre}}</h1>
     </div>
     
-    <x-cards></x-cards>
+    @foreach ($posts as $post)
+        <div class="col-12 col-sm-10 mx-auto rounded">
+            <x-cards :post="$post"/>
+        </div>
+    @endforeach
+
+    <div class="mt-4 d-flex justify-content-end">
+        {{ $posts->links() }}
+    </div>
 </div>
 
 @endsection
