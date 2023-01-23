@@ -30,4 +30,7 @@ Route::get('/categoria/{categoria}' , [PostController::class , 'categoria'])
 Route::get('/etiqueta/{etiqueta}' , [PostController::class , 'etiqueta'])
     ->name('post.etiqueta');
 
+Route::get('/post/buscador' , [PostController::class , 'buscador'])
+    ->name('post.buscador');
+
 require __DIR__.'/auth.php';

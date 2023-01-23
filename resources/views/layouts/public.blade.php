@@ -8,6 +8,8 @@
 		<!-- Bootstrap CSS -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+		<script src="{{ asset('js/blog.js') }}" defer></script>
+
 		<title>Blog laravel!</title>
 	</head>
 	<body>
@@ -33,13 +35,13 @@
 						</ul>
 					</li>
 					</ul>
-					<form class="d-flex">
-						<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-						<button class="btn btn-outline-success text-white" type="submit">Buscar</button>
+					<form class="d-flex" style="width:400px">
+						<input class="form-control me-2" name="texto" id="texto" type="search" placeholder="Buscar" aria-label="Search">
 					</form>
 				</div>
 			</div>
 		</nav>
+		<div style="position:absolute;right:0px;max-width:600px;background-color: #ff0000;z-index:100000;opacity:0.8" id="resultados"></div>
 
 		<div class="container">
 			@yield('contenidoPrincipal')

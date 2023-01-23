@@ -46,4 +46,16 @@ class PostController extends Controller
         $posts = $etiqueta->posts()->where('estado' , 2)->latest('id')->paginate(4);
         return  view('posts.etiqueta', compact('posts','etiqueta'));
     }
+
+    public function buscador(Request $request)
+    {
+        $posts = Post::where([
+            ['nombre' , 'like' ,$request->texto."%"],
+            ['estado' , 2]
+        ])
+        ->take(10)
+        ->get();
+
+        return view("partials.buscador" , compact('posts'));
+    }
 }
