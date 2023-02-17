@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -38,9 +40,16 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        dd($request);
+        $post = Post::create($request->all());
+
+        if($request->etiquetas) {
+            $post->etiquetas()->attach($request->etiquetas);
+        }
+
+        return redirect()->route('admin.post.create');
+
     }
 
     /**

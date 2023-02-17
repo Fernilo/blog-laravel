@@ -320,9 +320,9 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'text' => 'Post',
+            'url'  => 'admin/post/create',
+            'icon' => 'fas fa-newspaper',
         ],
         [
             'text' => 'change_password',
