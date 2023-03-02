@@ -4,16 +4,16 @@
 
 @section('content_header')
     <h1>Listado de Post</h1>
+    <a href="{{route('post.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
 @stop
+
+
 
 @section('content')
+    @if(session('mensaje'))
+        <div class="alert-success p-3 mb-3 ">
+            <p>{{session('mensaje')}}</p>
+        </div>
+    @endif
     @livewire('admin.post-index')
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
 @stop

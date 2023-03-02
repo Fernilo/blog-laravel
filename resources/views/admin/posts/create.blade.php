@@ -84,18 +84,10 @@
                     <small class="text-danger">{{$message}}</small>
                 @enderror
             </div>
-            <a href="/articulos" class="btn btn-secondary">Cancelar</a>
+            <a href="{{route('post.index')}}" class="btn btn-secondary">Cancelar</a>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
 
     </div>
 </div>
-@stop
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-    <script> console.log('Hi!'); </script>
 @stop

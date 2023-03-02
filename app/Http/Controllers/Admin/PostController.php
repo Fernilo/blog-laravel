@@ -49,7 +49,7 @@ class PostController extends Controller
             $post->etiquetas()->attach($request->etiquetas);
         }
 
-        return redirect()->route('admin.post.create');
+        return redirect()->route('post.index')->with(['mensaje' => "Post Creado Correctamente"]);
 
     }
 
