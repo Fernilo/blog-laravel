@@ -321,7 +321,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Post',
-            'url'  => 'admin/post/create',
+            'url'  => 'admin/post/index',
             'icon' => 'fas fa-newspaper',
         ],
         [
@@ -537,5 +537,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
