@@ -21,6 +21,17 @@
                 @enderror
             </div>
 
+            <div class="row mb-3">
+                <div class="col">
+                    <img class="img-fluid" src="https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg" alt="">
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="file" class="form-control" id="imagen">
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
                 <input type="text" name="descripcion" class="form-control" id="descripcion" aria-describedby="descripcionHelp">
