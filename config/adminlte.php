@@ -320,6 +320,11 @@ return [
         // ],
         ['header' => 'account_settings'],
         [
+            'text' => 'Etiquetas',
+            'url'  => 'admin/etiquetas/index',
+            'icon' => 'fas fa-tags',
+        ],
+        [
             'text' => 'Post',
             'url'  => 'admin/post/index',
             'icon' => 'fas fa-newspaper',
