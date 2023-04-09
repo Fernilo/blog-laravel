@@ -4,10 +4,8 @@
 
 @section('content_header')
     <h1>Listado de Etiquetas</h1>
-    <a href="{{route('post.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+    <a href="{{route('etiquetas.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
 @stop
-
-
 
 @section('content')
     @if(session('mensaje'))

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Etiqueta;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEtiquetasRequest;
+
 
 class EtiquetaController extends Controller
 {
@@ -27,7 +29,20 @@ class EtiquetaController extends Controller
      */
     public function create()
     {
-        //
+        $colores = [
+            'red' => 'red' , 
+            'yellow' => 'yellow' , 
+            'green' => 'green' , 
+            'blue' => 'blue' , 
+            'indigo' => 'indigo' , 
+            'purple' => 'purple' , 
+            'pink' => 'pink' , 
+            'brown' => 'brown' ,
+            'orange' => 'orange' , 
+            'gold'  => 'gold' , 
+            'cyan' => 'cyan'
+        ];
+        return view('admin.etiquetas.create' , compact('colores'));
     }
 
     /**
@@ -36,20 +51,11 @@ class EtiquetaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEtiquetasRequest $request)
     {
-        //
-    }
+        $etiqueta = Etiqueta::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('etiquetas.index')->with(['mensaje' => "Etiqueta Creada Correctamente"]);
     }
 
     /**
@@ -60,7 +66,21 @@ class EtiquetaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $etiqueta = Etiqueta::find($id);
+        $colores = [
+            'red' => 'red' , 
+            'yellow' => 'yellow' , 
+            'green' => 'green' , 
+            'blue' => 'blue' , 
+            'indigo' => 'indigo' , 
+            'purple' => 'purple' , 
+            'pink' => 'pink' , 
+            'brown' => 'brown' ,
+            'orange' => 'orange' , 
+            'gold'  => 'gold' , 
+            'cyan' => 'cyan'
+        ];
+        return view('admin.etiquetas.edit' , compact('colores','etiqueta'));
     }
 
     /**
@@ -70,9 +90,11 @@ class EtiquetaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreEtiquetasRequest $request , Etiqueta $etiqueta)
     {
-        //
+        $etiqueta->update($request->all());
+
+        return redirect()->route('etiquetas.index')->with(['mensaje' => "Etiqueta Editada Correctamente"]);
     }
 
     /**
