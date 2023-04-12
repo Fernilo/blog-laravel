@@ -43,6 +43,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        dd($request->file('imagen')->store('posts' , 'public'));
         $post = Post::create($request->all());
 
         if($request->etiquetas) {

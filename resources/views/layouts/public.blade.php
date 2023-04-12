@@ -34,6 +34,11 @@
 							@endforeach
 						</ul>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{route('dashboard')}}">
+						Admin
+						</a>
+					</li>
 					</ul>
 					<form class="d-flex" style="width:400px">
 						<input class="form-control me-2" name="texto" id="texto" type="search" placeholder="Buscar" aria-label="Search">

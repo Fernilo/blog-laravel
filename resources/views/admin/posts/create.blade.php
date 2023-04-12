@@ -8,7 +8,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('post.store') }}" method="POST" autocomplete="off">
+        <form action="{{ route('post.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
         @csrf
             <input type="hidden" name="usuario_id" value="{{auth()->user()->id}}">
             <div class="form-group">
@@ -22,11 +22,11 @@
 
             <div class="row mb-3">
                 <div class="col">
-                    <img class="img-fluid" src="https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg" alt="">
+                    <img id="imagen-post" class="img-fluid" src="https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg" alt="">
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <input type="file" class="form-control" id="imagen">
+                        <input name="imagen" type="file" class="form-control" id="imagen-file">
                     </div>
                 </div>
             </div>
@@ -100,4 +100,20 @@
 
     </div>
 </div>
+<script>
+    const fileSelector = document.getElementById("imagen-file")
+    fileSelector.addEventListener('change' , cambiarImagen)
+
+    function cambiarImagen(event) {
+       
+        let file = event.taget.files;
+console.log(file);
+        let reader = new FileReader();
+        reader.onload = (event) => {
+            document.getElementById("imagen-post").setAttribute('src' , event.target.result);
+        }
+
+        reader.readAsDataUrl(file);
+    }
+</script>
 @stop
