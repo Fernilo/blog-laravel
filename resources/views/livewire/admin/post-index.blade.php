@@ -1,15 +1,20 @@
 <div class="card">
     @if ($posts->count())
         <div class="card-body">
+            @if(session('info'))
+                <div class="alert-success p-3 mb-3 ">
+                    <p>{{session('info')}}</p>
+                </div>
+            @endif
             <div class="card-header">
                 <input wire:model="search" type="text" class="form-control" placeholder="Nombre del post">
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Acciones</th>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -17,9 +22,16 @@
                         <tr>
                             <th scope="row">{{$post->id}}</th>
                             <td>{{$post->nombre}}</td>
-                            <td>
+                            <td width=10px>
                                 <a class="btn btn-primary btn-sm" href=""><i class="fas fa-pen"></i></a>
-                                <a class="btn btn-danger btn-sm" href=""><i class="fas fa-trash"></i></a>
+                            </td>
+                            <td width=10px>
+                                <form action="{{route('post.destroy',$post)}}" method="POST">
+                                    @csrf
+                                    @method('delete')
+
+                                    <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>                                    
+                                </form>
                             </td>
                         </tr>
                     @endforeach
