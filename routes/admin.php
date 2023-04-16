@@ -1,14 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\EtiquetaController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('' , [HomeController::class , 'index']);
+Route::get('/' , [HomeController::class , 'index']);
 Route::get('post/create',[PostController::class , 'create'])->name('post.create');
 Route::post('post/store',[PostController::class , 'store'])->name('post.store');
-Route::get('post/index', [PostController::class , 'index'])->name('post.index');
+Route::get('post/index', [PostController::class , 'index'])->name('admin.post.index');
 Route::delete('post/{post}' , [PostController::class , 'destroy'])->name('post.destroy');
 
 Route::get('etiquetas/index' , [EtiquetaController::class , 'index'])->name('etiquetas.index');
@@ -17,3 +18,7 @@ Route::post('etiquetas/store',[EtiquetaController::class , 'store'])->name('etiq
 Route::get('etiquetas/edit/{id}',[EtiquetaController::class , 'edit'])->name('etiquetas.edit');
 Route::post('etiquetas/update/{etiqueta}',[EtiquetaController::class , 'update'])->name('etiquetas.update');
 Route::delete('etiquetas/{etiqueta}' , [EtiquetaController::class , 'destroy'])->name('etiquetas.destroy');
+
+Route::get('categorias/index' , [CategoriaController::class , 'index'])->name('categorias.index');
+Route::get('categorias/create' , [CategoriaController::class , 'create'])->name('categorias.create');
+Route::post('categorias/store' , [CategoriaController::class , 'store'])->name('categorias.store');

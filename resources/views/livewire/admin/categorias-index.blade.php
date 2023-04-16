@@ -1,5 +1,5 @@
 <div class="card">
-    @if ($etiquetas->count())
+    @if ($categorias->count())
         <div class="card-body">
             @if(session('info'))
                 <div class="alert-success p-3 mb-3 ">
@@ -7,28 +7,26 @@
                 </div>
             @endif
             <div class="card-header">
-                <input wire:model="search" type="text" class="form-control" placeholder="Nombre de la etiqueta">
+                <input wire:model="search" type="text" class="form-control" placeholder="Nombre de la categoría">
             </div>
             <table class="table table-striped">
                 <thead>
                     <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Color</th>
                     <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($etiquetas as $etiqueta)
+                    @foreach ($categorias as $categoria)
                         <tr>
-                            <th scope="row">{{$etiqueta->id}}</th>
-                            <td>{{$etiqueta->nombre}}</td>
-                            <td>{{$etiqueta->color}}</td>
+                            <th scope="row">{{$categoria->id}}</th>
+                            <td>{{$categoria->nombre}}</td>
                             <td width=10px>
-                                <a class="btn btn-primary btn-sm" href="{{route('etiquetas.edit' , $etiqueta->id)}}"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{route('etiquetas.edit' , $categoria->id)}}"><i class="fas fa-pen"></i></a>
                             </td>
                             <td width=10px>
-                                <form action="{{route('etiquetas.destroy',$etiqueta)}}" method="POST">
+                                <form action="{{route('etiquetas.destroy',$categoria)}}" method="POST">
                                     @csrf
                                     @method('delete')
 
@@ -41,11 +39,11 @@
             </table>
         </div>
         <div class="card-footer">
-            {{$etiquetas->links()}}
+            {{-- {{$categorias->links()}} --}}
         </div>
     @else 
         <div class="card-body">
-            No existen etiquetas relacionados
+            No existen categorias relacionadas
         </div>
     @endif
 </div>

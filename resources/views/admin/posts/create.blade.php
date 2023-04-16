@@ -94,7 +94,7 @@
                     <small class="text-danger">{{$message}}</small>
                 @enderror
             </div>
-            <a href="{{route('post.index')}}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{route('admin.post.index')}}" class="btn btn-secondary">Cancelar</a>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
 
