@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
@@ -20,9 +21,8 @@ Route::get('/', [PostController::class , 'index' ])
 Route::get('/posts/{post:slug}' , [PostController::class , 'show'])
     ->name('post.show');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/admin', [HomeController::class , 'index'])->middleware(['auth'])
+    ->name('admin');
 
 Route::get('/categoria/{categoria}' , [PostController::class , 'categoria'])
     ->name('post.categoria');

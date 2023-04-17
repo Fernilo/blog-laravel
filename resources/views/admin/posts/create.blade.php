@@ -106,14 +106,14 @@
 
     function cambiarImagen(event) {
        
-        let file = event.taget.files;
-console.log(file);
-        let reader = new FileReader();
+        var file = event.currentTarget.files[0];
+
+        var reader = new FileReader();
         reader.onload = (event) => {
             document.getElementById("imagen-post").setAttribute('src' , event.target.result);
         }
 
-        reader.readAsDataUrl(file);
+        reader.readAsDataURL(file);
     }
 </script>
 @stop
