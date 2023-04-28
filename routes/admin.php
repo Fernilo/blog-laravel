@@ -11,6 +11,7 @@ Route::get('post/create',[PostController::class , 'create'])->name('post.create'
 Route::post('post/store',[PostController::class , 'store'])->name('post.store');
 Route::get('post/index', [PostController::class , 'index'])->name('admin.post.index');
 Route::delete('post/{post}' , [PostController::class , 'destroy'])->name('post.destroy');
+Route::get('post/edit/{id}' , [PostController::class , 'edit'])->name('post.edit');
 
 Route::get('etiquetas/index' , [EtiquetaController::class , 'index'])->name('etiquetas.index');
 Route::get('etiquetas/create',[EtiquetaController::class , 'create'])->name('etiquetas.create');

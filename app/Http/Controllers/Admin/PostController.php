@@ -43,14 +43,14 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        dd($request->file('imagen')->store('posts' , 'public'));
+        $request->file('imagen')->store('posts' , 'public');
         $post = Post::create($request->all());
 
         if($request->etiquetas) {
             $post->etiquetas()->attach($request->etiquetas);
         }
 
-        return redirect()->route('post.index')->with(['mensaje' => "Post Creado Correctamente"]);
+        return redirect()->route('admin.post.index')->with(['mensaje' => "Post Creado Correctamente"]);
 
     }
 
@@ -73,7 +73,12 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id)->with(['image','categoria', 'etiqueta']);
+
+        $etiquetas = Etiqueta::all();
+        $categorias = Categoria::pluck('id' , 'nombre');
+
+        return view('admin.posts.edit',compact('categorias','etiquetas','post'));
     }
 
     /**
@@ -98,6 +103,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect()->route('post.index')->with(['info' => 'El post ha sido borrada']);
+        return redirect()->route('admin.post.index')->with(['info' => 'El post ha sido borrada']);
     }
 }
