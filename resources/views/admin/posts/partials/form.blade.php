@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" class="form-control" value="{{$post->nombre}}" id="nombre" aria-describedby="codigoHelp">
+    <input type="text" name="nombre" class="form-control" value="{{$post->nombre?? ''}}" id="nombre" aria-describedby="codigoHelp">
     
     @error('nombre')
         <small class="text-danger">{{$message}}</small>
@@ -9,7 +9,11 @@
 
 <div class="row mb-3">
     <div class="col">
-        <img id="imagen-post" class="img-fluid" src="https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg" alt="">
+        @isset($post->image)
+            <img class="img-fluid" src="{{Storage::url($post->image->url)}}" alt="">
+        @else
+            <img id="imagen-post" class="img-fluid" src="https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg" alt="">
+        @endisset
     </div>
     <div class="col">
         <div class="form-group">
@@ -20,7 +24,7 @@
 
 <div class="form-group">
     <label for="descripcion">Descripción</label>
-    <input type="text" name="descripcion" class="form-control" id="descripcion" aria-describedby="descripcionHelp">
+    <input type="text" name="descripcion" value="{{$post->descripcion?? ''}}" class="form-control" id="descripcion" aria-describedby="descripcionHelp">
     
     @error('descripcion')
         <small class="text-danger">{{$message}}</small>
@@ -29,7 +33,7 @@
 
 <div class="form-group">
     <label for="cuerpo">Cuerpo</label>
-    <textarea name="cuerpo" class="form-control" id="cuerpo" cols="30" rows="10"></textarea>
+    <textarea name="cuerpo" class="form-control" id="cuerpo" cols="30" rows="10">{{$post->nombre?? ''}}</textarea>
     
     @error('cuerpo')
         <small class="text-danger">{{$message}}</small>
@@ -41,7 +45,7 @@
     <select name="categoria_id" class="form-control" id="">
         <option value="">Seleccione Categoría</option>
         @foreach ($categorias as $categoria)
-            <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+            <option value="{{$categoria->id}}" @if(isset($post)? $post->categoria_id === $categoria->id : '') selected @endif>{{$categoria->nombre}}</option>
         @endforeach
     </select>
     

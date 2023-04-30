@@ -73,7 +73,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id)->with(['image','categoria', 'etiqueta']);
+        $post = Post::find($id);
 
         $etiquetas = Etiqueta::all();
         $categorias = Categoria::pluck('id' , 'nombre');
@@ -85,12 +85,25 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePostRequest $request)
     {
-        //
+        $post = Post::update($request->all());
+
+        // if($request->file('imagen')) {
+        //     $request->file('imagen')->store('posts' , 'public');
+
+        //     if($post->image) {
+        //         Storage::delete($post->image->url);
+        //     }
+        // }
+        // if($request->etiquetas) {
+        //     $post->etiquetas()->attach($request->etiquetas);
+        // }
+
+        return redirect()->route('admin.post.index')->with(['mensaje' => "Post Creado Correctamente"]);
     }
 
     /**

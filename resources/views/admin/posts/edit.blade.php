@@ -8,9 +8,8 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('post.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+        <form action="{{ route('post.update' , $post) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
         @csrf
-            <input type="hidden" name="usuario_id" value="{{auth()->user()->id}}">
             @include('admin.posts.partials.form')
 
             <a href="{{route('admin.post.index')}}" class="btn btn-secondary">Cancelar</a>

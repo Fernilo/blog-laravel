@@ -14,11 +14,13 @@ class StorePostRequest extends FormRequest
     public function authorize()
     {
         //Valido si el usuario del ABM del post coincide con el usuario logueado
-        if($this->usuario_id == auth()->user()->id) {
-            return true;
-        } else {
-            return false;
-        }
+        // if($this->usuario_id == auth()->user()->id) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+
+        return true;
     }
 
     /**
