@@ -48,4 +48,13 @@ class StorePostRequest extends FormRequest
 
         return $rules;
     }
+
+    public function messages() 
+    {
+        return [
+            'nombre.required' => "El nombre es requerido",
+            'descripcion.required' => "La descripción es requerida",
+            'cuerpo.required' => "El cuerpo es requerido"
+        ];
+    }
 }

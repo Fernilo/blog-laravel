@@ -8,6 +8,7 @@ use App\Models\Etiqueta;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -88,22 +89,29 @@ class PostController extends Controller
      * @param  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(StorePostRequest $request)
+    public function update(StorePostRequest $request , Post $post)
     {
-        $post = Post::update($request->all());
+        $post->update($request->all());
+        if($request->file('imagen')) {
+            //$request->file('imagen')->store('posts' , 'public');
+            $url = Storage::put('public/posts', $request->file('imagen'));
+            if($post->image) {
+                Storage::delete($post->image->url);
 
-        // if($request->file('imagen')) {
-        //     $request->file('imagen')->store('posts' , 'public');
+                $post->image->update([
+                    'url' => $url
+                ]);
+            } else {
+                $post->image()->create([
+                    'url' => $url
+                ]);
+            }
+        }
+        if($request->etiquetas) {
+            $post->etiquetas()->attach($request->etiquetas);
+        }
 
-        //     if($post->image) {
-        //         Storage::delete($post->image->url);
-        //     }
-        // }
-        // if($request->etiquetas) {
-        //     $post->etiquetas()->attach($request->etiquetas);
-        // }
-
-        return redirect()->route('admin.post.index')->with(['mensaje' => "Post Creado Correctamente"]);
+        return redirect()->route('admin.post.index')->with(['mensaje' => "Post Editado Correctamente"]);
     }
 
     /**
