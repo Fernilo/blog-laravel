@@ -23,12 +23,12 @@
                             <th scope="row">{{$categoria->id}}</th>
                             <td>{{$categoria->nombre}}</td>
                             <td width=10px>
-                                <a class="btn btn-primary btn-sm" href="{{route('etiquetas.edit' , $categoria->id)}}"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{route('categorias.edit' , $categoria->id)}}"><i class="fas fa-pen"></i></a>
                             </td>
                             <td width=10px>
-                                <form action="{{route('etiquetas.destroy',$categoria)}}" method="POST">
-                                    @csrf
-                                    @method('delete')
+                                <form action="{{route('categorias.destroy',$categoria)}}" method="POST">
+                                @csrf
+                                @method('delete')
 
                                     <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>                                    
                                 </form>
@@ -39,7 +39,7 @@
             </table>
         </div>
         <div class="card-footer">
-            {{-- {{$categorias->links()}} --}}
+            {{$categorias->links()}}
         </div>
     @else 
         <div class="card-body">

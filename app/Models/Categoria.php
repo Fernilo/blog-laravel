@@ -19,8 +19,8 @@ class Categoria extends Model
     protected static function boot() {
         parent::boot();
 
-        static::creating(function ($etiqueta) {
-            $etiqueta->slug = Str::slug($etiqueta->nombre);
+        static::creating(function ($categoria) {
+            $categoria->slug = Str::slug($categoria->nombre);
         });
     }
 }

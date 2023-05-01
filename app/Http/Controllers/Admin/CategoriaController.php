@@ -63,7 +63,9 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        return view('admin.categorias.edit' , compact('categoria'));
     }
 
     /**
@@ -73,9 +75,12 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategoriasRequest $request,Categoria $categoria)
     {
-        //
+        dd($categoria);
+        $categoria->update($request->all());
+
+        return redirect()->route('categorias.index')->with(['mensaje' => 'Categoria editada correctamente']);
     }
 
     /**

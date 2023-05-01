@@ -8,8 +8,8 @@ class CategoriasComposer
 {
     public function compose(View $view)
     {
-        $categorias = Categoria::orderBy('nombre')->get();
+        // $categorias = Categoria::orderBy('nombre')->get();
 
-        $view->with('categorias' , $categorias);
+        // $view->with('categorias' , $categorias);
     }
 }
