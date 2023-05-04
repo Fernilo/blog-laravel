@@ -24,7 +24,7 @@
 					<li class="nav-item">
 						<a class="nav-link {{ (Route::currentRouteName() == 'post.index')? 'active' : ''  }}" href="{{ route('post.index') }}">Home</a>
 					</li>
-					<li class="nav-item dropdown">
+					{{-- <li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 						Categorías
 						</a>
@@ -33,7 +33,7 @@
 								<li><a class="dropdown-item" href="{{ route('post.categoria',$categoria )}}">{{ $categoria->nombre }}</a></li>
 							@endforeach
 						</ul>
-					</li>
+					</li> --}}
 					{{-- <li class="nav-item">
 						<a class="nav-link" href="{{ route('home.admin') }}">
 						Admin

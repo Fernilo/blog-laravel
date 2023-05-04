@@ -30,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::pluck('nombre', 'id');
+        $categorias = Categoria::select('id' , 'nombre')->get();
         $etiquetas = Etiqueta::all();
 
         return view('admin.posts.create',compact('categorias','etiquetas'));
@@ -44,8 +44,12 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $request->file('imagen')->store('posts' , 'public');
         $post = Post::create($request->all());
+        $url = Storage::put('posts',$request->file('imagen'));
+   
+        $post->image()->create([
+            'url' => $url
+        ]);
 
         if($request->etiquetas) {
             $post->etiquetas()->attach($request->etiquetas);
@@ -77,7 +81,7 @@ class PostController extends Controller
         $post = Post::find($id);
 
         $etiquetas = Etiqueta::all();
-        $categorias = Categoria::pluck('id' , 'nombre');
+        $categorias = Categoria::select('id' , 'nombre')->get();
 
         return view('admin.posts.edit',compact('categorias','etiquetas','post'));
     }
@@ -94,7 +98,7 @@ class PostController extends Controller
         $post->update($request->all());
         if($request->file('imagen')) {
             //$request->file('imagen')->store('posts' , 'public');
-            $url = Storage::put('public/posts', $request->file('imagen'));
+            $url = Storage::put('posts', $request->file('imagen'));
             if($post->image) {
                 Storage::delete($post->image->url);
 

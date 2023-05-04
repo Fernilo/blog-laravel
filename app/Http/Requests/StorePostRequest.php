@@ -34,7 +34,8 @@ class StorePostRequest extends FormRequest
         $rules = [
             'nombre' => 'required',
             //'slug' => 'required|unique:post',
-            'estado' => 'required|in:1,2'
+            'estado' => 'required|in:1,2',
+            'imagen' => 'image'
         ];
 
         if($this->estado == 2) {
@@ -54,7 +55,9 @@ class StorePostRequest extends FormRequest
         return [
             'nombre.required' => "El nombre es requerido",
             'descripcion.required' => "La descripción es requerida",
-            'cuerpo.required' => "El cuerpo es requerido"
+            'cuerpo.required' => "El cuerpo es requerido",
+            'categoria_id.required' => "La categoría es requerida",
+            'imagen.image' => "Solo se aceptan imagenes"
         ];
     }
 }

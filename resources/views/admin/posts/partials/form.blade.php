@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" class="form-control" value="{{$post->nombre?? ''}}" id="nombre" aria-describedby="codigoHelp">
+    <input type="text" name="nombre" class="form-control" required value="{{$post->nombre?? old('nombre')}}" id="nombre" aria-describedby="codigoHelp">
     
     @error('nombre')
         <small class="text-danger">{{$message}}</small>
@@ -17,14 +17,18 @@
     </div>
     <div class="col">
         <div class="form-group">
-            <input name="imagen" type="file" class="form-control" id="imagen-file">
+            <input name="imagen" accept="image/*" type="file" class="form-control" id="imagen-file">
+
+            @error('imagen')
+                <small class="text-danger">{{$message}}</small>
+            @enderror
         </div>
     </div>
 </div>
 
 <div class="form-group">
     <label for="descripcion">Descripción</label>
-    <input type="text" name="descripcion" value="{{$post->descripcion?? ''}}" class="form-control" id="descripcion" aria-describedby="descripcionHelp">
+    <input type="text" name="descripcion" value="{{$post->descripcion?? old('descripcion')}}" class="form-control" id="descripcion" aria-describedby="descripcionHelp">
     
     @error('descripcion')
         <small class="text-danger">{{$message}}</small>
@@ -33,7 +37,7 @@
 
 <div class="form-group">
     <label for="cuerpo">Cuerpo</label>
-    <textarea name="cuerpo" class="form-control" id="cuerpo" cols="30" rows="10">{{$post->nombre?? ''}}</textarea>
+    <textarea name="cuerpo" class="form-control" id="cuerpo" cols="30" rows="10">{{$post->cuerpo?? old('cuerpo')}}</textarea>
     
     @error('cuerpo')
         <small class="text-danger">{{$message}}</small>
@@ -44,9 +48,17 @@
     <label for="categoria_id">Categoría</label>
     <select name="categoria_id" class="form-control" id="">
         <option value="">Seleccione Categoría</option>
+     
         @foreach ($categorias as $categoria)
-            <option value="{{$categoria->id}}" @if(isset($post)? $post->categoria_id === $categoria->id : '') selected @endif>{{$categoria->nombre}}</option>
+            <?php if(isset($post)): ?>
+                <option value="{{$categoria->id}}" <?= ($post->categoria_id === $categoria->id)? 'selected' : '' ?>>{{$categoria->nombre}}</option>
+            <?php else: ?>
+                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+            <?php endif; ?>
         @endforeach
+        @error('categoria_id')
+            <small class="text-danger">{{$message}}</small>
+        @enderror
     </select>
     
     @error('categoria_id')
