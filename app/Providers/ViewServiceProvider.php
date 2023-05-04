@@ -16,7 +16,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        View::composer(['*'] , 'App\Http\ViewComposers\CategoriasComposer');
+        // View::composer(['*'] , 'App\Http\ViewComposers\CategoriasComposer');
     }
 
     /**

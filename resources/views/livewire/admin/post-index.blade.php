@@ -23,7 +23,7 @@
                             <th scope="row">{{$post->id}}</th>
                             <td>{{$post->nombre}}</td>
                             <td width=10px>
-                                <a class="btn btn-primary btn-sm" href="{{route('post.edit', $post->id)}}"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{route('post.edit', $post)}}"><i class="fas fa-pen"></i></a>
                             </td>
                             <td width=10px>
                                 <form action="{{route('post.destroy',$post)}}" method="POST">

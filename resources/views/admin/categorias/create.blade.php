@@ -12,7 +12,7 @@
         @csrf
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" class="form-control" id="nombre" aria-describedby="codigoHelp">
+                <input type="text" name="nombre" class="form-control" id="nombre">
                 
                 @error('nombre')
                     <small class="text-danger">{{$message}}</small>

@@ -25,7 +25,7 @@
                             <td>{{$etiqueta->nombre}}</td>
                             <td>{{$etiqueta->color}}</td>
                             <td width=10px>
-                                <a class="btn btn-primary btn-sm" href="{{route('etiquetas.edit' , $etiqueta->id)}}"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{route('etiquetas.edit' , $etiqueta)}}"><i class="fas fa-pen"></i></a>
                             </td>
                             <td width=10px>
                                 <form action="{{route('etiquetas.destroy',$etiqueta)}}" method="POST">

@@ -77,7 +77,6 @@ class CategoriaController extends Controller
      */
     public function update(StoreCategoriasRequest $request,Categoria $categoria)
     {
-        dd($categoria);
         $categoria->update($request->all());
 
         return redirect()->route('categorias.index')->with(['mensaje' => 'Categoria editada correctamente']);
@@ -89,8 +88,10 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+
+        return redirect()->route('categorias.index')->with(['info' => 'la categoría ha sido borrada']);
     }
 }

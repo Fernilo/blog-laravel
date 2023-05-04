@@ -318,7 +318,7 @@ return [
         //     'label'       => 4,
         //     'label_color' => 'success',
         // ],
-        ['header' => 'account_settings'],
+        ['header' => 'Módulos'],
         [
             'text' => 'Categorías',
             'url'  => 'admin/categorias/index',
@@ -333,22 +333,6 @@ return [
             'text' => 'Post',
             'url'  => 'admin/post/index',
             'icon' => 'fas fa-newspaper',
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
         ],
     ],
 

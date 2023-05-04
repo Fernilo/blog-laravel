@@ -25,6 +25,6 @@ Route::delete('etiquetas/{etiqueta}' , [EtiquetaController::class , 'destroy'])-
 Route::get('categorias/index' , [CategoriaController::class , 'index'])->name('categorias.index');
 Route::get('categorias/create' , [CategoriaController::class , 'create'])->name('categorias.create');
 Route::post('categorias/store' , [CategoriaController::class , 'store'])->name('categorias.store');
-Route::patch('categorias/update' , [CategoriaController::class , 'update'])->name('categorias.update');
+Route::patch('categorias/update{categoria}' , [CategoriaController::class , 'update'])->name('categorias.update');
 Route::get('categorias/edit/{id}' , [CategoriaController::class , 'edit'])->name('categorias.edit');
 Route::delete('categorias/{categoria}' , [CategoriaController::class , 'destroy'])->name('categorias.destroy');
