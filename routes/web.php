@@ -18,7 +18,7 @@ use App\Http\Controllers\PostController;
 Route::get('/', [PostController::class , 'index' ])
     ->name('post.index');
 
-Route::get('/posts/{post:slug}' , [PostController::class , 'show'])
+Route::get('/posts/{post}' , [PostController::class , 'show'])
     ->name('post.show');
 
 Route::get('/admin', [HomeController::class , 'index'])

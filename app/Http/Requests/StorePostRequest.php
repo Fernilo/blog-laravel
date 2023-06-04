@@ -57,7 +57,8 @@ class StorePostRequest extends FormRequest
             'descripcion.required' => "La descripción es requerida",
             'cuerpo.required' => "El cuerpo es requerido",
             'categoria_id.required' => "La categoría es requerida",
-            'imagen.image' => "Solo se aceptan imagenes"
+            'imagen.image' => "Solo se aceptan imagenes",
+            'etiquetas.required' => "La etiqueta es requerida"
         ];
     }
 }

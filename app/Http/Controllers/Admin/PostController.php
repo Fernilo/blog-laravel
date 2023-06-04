@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PostSaved;
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Models\Etiqueta;
@@ -45,11 +46,14 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = Post::create($request->all());
-        $url = Storage::put('posts',$request->file('imagen'));
-   
+        
+        $url = Storage::put('/public/posts',$request->file('imagen'));
+
         $post->image()->create([
             'url' => $url
         ]);
+
+        PostSaved::dispatch($post);
 
         if($request->etiquetas) {
             $post->etiquetas()->attach($request->etiquetas);
@@ -98,7 +102,7 @@ class PostController extends Controller
         $post->update($request->all());
         if($request->file('imagen')) {
             //$request->file('imagen')->store('posts' , 'public');
-            $url = Storage::put('posts', $request->file('imagen'));
+            $url = Storage::put('public/posts', $request->file('imagen'));
             if($post->image) {
                 Storage::delete($post->image->url);
 
