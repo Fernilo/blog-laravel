@@ -81,13 +81,13 @@
 
 <div class="form-group">
     <div class="form-check">
-        <input class="form-check-input" value="2" type="radio" name="estado" id="estado">
+        <input class="form-check-input" value="2" type="radio" name="estado" id="estado" {{$post->estado == 2? 'checked' : ''}}>
         <label class="form-check-label" for="publicado">
             Publicado
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" value="1" type="radio" name="estado" id="estado" checked>
+        <input class="form-check-input" value="1" type="radio" name="estado" id="estado" {{$post->estado == 1? 'checked' : ''}}>
         <label class="form-check-label" for="borrador">
             Borrador
         </label>

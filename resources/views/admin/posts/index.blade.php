@@ -15,5 +15,5 @@
             <p>{{session('mensaje')}}</p>
         </div>
     @endif
-    @livewire('admin.post-index')
+    @livewire('admin.post-index' , ['states' => $states])
 @stop

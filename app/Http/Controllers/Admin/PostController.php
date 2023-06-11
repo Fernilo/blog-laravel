@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    protected $states = [
+        1 => 'Borrador',
+        2 => 'Publicado'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +25,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('admin.posts.index',compact('posts'));
+        return view('admin.posts.index',[compact('posts'),'states' => $this->states]);
     }
 
     /**

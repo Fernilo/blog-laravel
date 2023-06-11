@@ -32,7 +32,7 @@ class StorePostRequest extends FormRequest
     {
         
         $rules = [
-            'nombre' => 'required',
+            'nombre' => 'required|max:255',
             //'slug' => 'required|unique:post',
             'estado' => 'required|in:1,2',
             'imagen' => 'image'
@@ -41,10 +41,10 @@ class StorePostRequest extends FormRequest
         if($this->estado == 2) {
             $rules = array_merge($rules , [
                 'categoria_id' => 'required',
-                'etiquetas' => 'required',
                 'descripcion' => 'required',
                 'cuerpo' => 'required'
             ]);
+
         }
 
         return $rules;
@@ -58,7 +58,6 @@ class StorePostRequest extends FormRequest
             'cuerpo.required' => "El cuerpo es requerido",
             'categoria_id.required' => "La categoría es requerida",
             'imagen.image' => "Solo se aceptan imagenes",
-            'etiquetas.required' => "La etiqueta es requerida"
         ];
     }
 }
