@@ -86,8 +86,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
-
+        $post = Post::with('categoria','etiquetas')->find($id);//Con with precargamos las relaciones y 
+        //evitamos nuevas consultas
         $etiquetas = Etiqueta::all();
         $categorias = Categoria::select('id' , 'nombre')->get();
 
