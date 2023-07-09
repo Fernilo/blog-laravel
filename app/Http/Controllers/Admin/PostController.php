@@ -10,6 +10,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 class PostController extends Controller
 {
@@ -113,6 +114,13 @@ class PostController extends Controller
                 $post->image->update([
                     'url' => $url
                 ]);
+
+                //Optimización de img
+                $manager = new ImageManager(['driver' => 'imagick']);
+                $image = $manager->make(Storage::get($post->image->url))->widen(600)->encode();
+                dd($image);
+
+                Storage::put($post->image->url , (string)$image);
             } else {
                 $post->image()->create([
                     'url' => $url
