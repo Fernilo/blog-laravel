@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use App\Models\Categoria;//No hace falta , está dentro del mismo namespace pero para que quede claro
 
 class Post extends Model
 {

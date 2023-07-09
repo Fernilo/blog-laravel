@@ -23,6 +23,8 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('usuario_id');
             $table->unsignedBigInteger('categoria_id');
 
+            //Acá lo ideal es setear el onDelete('set null') para que en la otra tabla setee null
+            //Con cascade borra la relación
             $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
 
@@ -37,6 +39,12 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
+        //Si queremos hacer rollback de esta tabla va a tirar error de integridad por la clave foránea 
+        //Para solucionar eso hay que eliminar la clave foránea antes de eliminar la tabla
+        Schema::table('posts' , function(Blueprint $table) {
+            $table->dropForeign('post_categoria_id_foreign');
+            $table->dropColumn('categoria_id');
+        });
         Schema::dropIfExists('posts');
     }
 }
