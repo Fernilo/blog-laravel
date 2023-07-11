@@ -1,6 +1,6 @@
 <div class="form-group">
     <label for="nombre">Nombre</label>
-    <input type="text" name="nombre" class="form-control" required value="{{$post->nombre?? old('nombre')}}" id="nombre" aria-describedby="codigoHelp">
+    <input type="text" name="nombre" class="form-control" value="{{$post->nombre?? old('nombre')}}" id="nombre" aria-describedby="codigoHelp">
     
     @error('nombre')
         <small class="text-danger">{{$message}}</small>
@@ -51,9 +51,9 @@
      
         @foreach ($categorias as $categoria)
             <?php if(isset($post)): ?>
-                <option value="{{$categoria->id}}" <?= ($post->categoria_id === $categoria->id)? 'selected' : '' ?>>{{$categoria->nombre}}</option>
+                <option value="{{$categoria->id}}" @if ($post->categoria_id === $categoria->id) selected @endif>{{$categoria->nombre}}</option>
             <?php else: ?>
-                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                <option value="{{$categoria->id}}" {{old('categoria_id')}}>{{$categoria->nombre}}</option>
             <?php endif; ?>
         @endforeach
         @error('categoria_id')
@@ -81,13 +81,13 @@
 
 <div class="form-group">
     <div class="form-check">
-        <input class="form-check-input" value="2" type="radio" name="estado" id="estado" {{$post->estado == 2? 'checked' : ''}}>
+        <input class="form-check-input" value="2" type="radio" name="estado" id="estado" {{isset($post) && $post->estado == 2? 'checked' : ''}}>
         <label class="form-check-label" for="publicado">
             Publicado
         </label>
     </div>
     <div class="form-check">
-        <input class="form-check-input" value="1" type="radio" name="estado" id="estado" {{$post->estado == 1? 'checked' : ''}}>
+        <input class="form-check-input" value="1" type="radio" name="estado" id="estado" {{isset($post) && $post->estado == 1? 'checked' : ''}}>
         <label class="form-check-label" for="borrador">
             Borrador
         </label>

@@ -35,12 +35,16 @@ class StorePostRequest extends FormRequest
             'nombre' => 'required|max:255',
             //'slug' => 'required|unique:post',
             'estado' => 'required|in:1,2',
-            'imagen' => 'image'
+            'imagen' => 'image',
+            'estado' => 'required',
+            'categoria_id' => [
+                'required',
+                'exists:categorias,id'
+            ]
         ];
 
         if($this->estado == 2) {
             $rules = array_merge($rules , [
-                'categoria_id' => 'required',
                 'descripcion' => 'required',
                 'cuerpo' => 'required'
             ]);
@@ -56,7 +60,9 @@ class StorePostRequest extends FormRequest
             'nombre.required' => "El nombre es requerido",
             'descripcion.required' => "La descripción es requerida",
             'cuerpo.required' => "El cuerpo es requerido",
+            'estado.required' => "El estado es requerido",
             'categoria_id.required' => "La categoría es requerida",
+            'categoria_id.exists' => "No existe esa categoría",
             'imagen.image' => "Solo se aceptan imagenes",
         ];
     }
