@@ -128,7 +128,7 @@ class PostController extends Controller
             }
         }
         if($request->etiquetas) {
-            $post->etiquetas()->attach($request->etiquetas);
+            $post->etiquetas()->sync($request->etiquetas);
         }
 
         return redirect()->route('admin.post.index')->with(['mensaje' => "Post Editado Correctamente"]);

@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('estado' , 2)->latest('id')->paginate(8);//nos devuelve una colección
+        $posts = Post::with(['categoria' , 'etiquetas'])->where('estado' , 2)->latest('id')->paginate(8);//nos devuelve una colección
         return view('posts.index' , compact('posts'));
     }
 
