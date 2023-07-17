@@ -16,7 +16,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // View::composer(['*'] , 'App\Http\ViewComposers\CategoriasComposer');
+        View::composer(['posts.index','posts.etiqueta','posts.categoria','posts.show'] , 'App\Http\ViewComposers\CategoriasComposer');
     }
 
     /**
@@ -26,8 +26,8 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // View::composer('categorias' , function($view) {
-        //     $view->with('categorias' , Categoria::get()->orderBy('nombre'));
-        // });
+        View::composer('categorias' , function($view) {
+            $view->with('categorias' , Categoria::get()->orderBy('nombre'));
+        });
     }
 }
