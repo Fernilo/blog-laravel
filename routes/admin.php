@@ -13,6 +13,7 @@ Route::get('post/index', [PostController::class , 'index'])->name('admin.post.in
 Route::delete('post/{post}' , [PostController::class , 'destroy'])->name('post.destroy');
 Route::get('post/edit/{id}' , [PostController::class , 'edit'])->name('post.edit');
 Route::post('post/update/{post}' , [PostController::class , 'update'])->name('post.update');
+Route::post('post/search/' , [PostController::class , 'searchById'])->name('post.search');
 
 
 Route::get('etiquetas/index' , [EtiquetaController::class , 'index'])->name('etiquetas.index');

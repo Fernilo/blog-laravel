@@ -8,6 +8,11 @@
             @endif
             <div class="card-header">
                 <input wire:model="search" type="text" class="form-control" placeholder="Nombre del post">
+                <form action="{{route('post.search')}}" method="POST" class="">
+                @csrf
+                    <input name="id" type="text" class="form-control mt-3" placeholder="Buscar post por id">
+                    <input type="submit" class="btn btn-primary mt-3" value="Buscar por id">
+                </form>
             </div>
             <table class="table table-striped">
                 <thead>

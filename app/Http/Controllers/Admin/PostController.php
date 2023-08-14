@@ -9,6 +9,7 @@ use App\Models\Etiqueta;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
+use App\Services\PostService;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
@@ -18,6 +19,13 @@ class PostController extends Controller
         1 => 'Borrador',
         2 => 'Publicado'
     ];
+
+    private $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -78,6 +86,8 @@ class PostController extends Controller
     {
         //
     }
+
+    
 
     /**
      * Show the form for editing the specified resource.
