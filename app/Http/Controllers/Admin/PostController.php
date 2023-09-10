@@ -37,6 +37,13 @@ class PostController extends Controller
         return view('admin.posts.index',[compact('posts'),'states' => $this->states]);
     }
 
+    public function searchById(Request $request)
+    {
+        $posts = $this->postService->searchById($request->input('id'));
+
+        return view('admin.posts.index',[compact('posts'),'states' => $this->states]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
