@@ -12,6 +12,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Services\PostService;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
+use SplFileInfo;
 
 class PostController extends Controller
 {
@@ -152,5 +153,18 @@ class PostController extends Controller
         $post->delete();
 
         return redirect()->route('admin.post.index')->with(['info' => 'El post ha sido borrada']);
+    }
+
+    /**
+     * Descarga de imagenes/archivos
+     *
+     * @param Post $post
+     * @return void
+     */
+    public function download(Post $post)
+    {
+        $info = new SplFileInfo($post->image->url);
+
+        return Storage::download($post->image->url,'imagen.'.$info->getExtension());
     }
 }

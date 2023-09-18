@@ -32,6 +32,11 @@
                             <td width=10px>
                                 <a class="btn btn-primary btn-sm" href="{{route('post.edit', $post)}}"><i class="fas fa-pen"></i></a>
                             </td>
+                            <td>
+                                @if(!empty($post->image))
+                                    <a class="btn btn-warning btn-sm"  href="{{route('post.download', $post)}}"><i class="fas fa-download"></i></a>
+                                @endif
+                            </td>
                             <td width=10px>
                                 <form action="{{route('post.destroy',$post)}}" method="POST">
                                     @csrf
