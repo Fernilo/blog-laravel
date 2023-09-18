@@ -8,7 +8,8 @@
         @endforeach
         <div class="mt-5">
             <h5 class="card-title"><a href="{{ route('post.show' , $post)}}" class="text-white">{{ $post->nombre }}</a></h5>
-            <p class="card-text">{{ $post->descripcion }}</p>
+            <!-- Para que laravel interprete las etiquetas html(no se escapen) -->
+            <p class="card-text">{!! $post->descripcion !!}</p>
         </div>
     </div>
 </div>

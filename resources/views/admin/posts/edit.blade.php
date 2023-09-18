@@ -25,7 +25,7 @@
     function cambiarImagen(event) {
        
         var file = event.currentTarget.files[0];
-
+console.log(file);
         var reader = new FileReader();
         reader.onload = (event) => {
             document.getElementById("imagen-post").setAttribute('src' , event.target.result);

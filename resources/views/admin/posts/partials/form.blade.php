@@ -10,9 +10,9 @@
 <div class="row mb-3">
     <div class="col">
         @isset($post->image)
-            <img class="img-fluid" src="{{Storage::url($post->image->url)}}" alt="">
+            <img class="img-fluid" src="{{Storage::url($post->image->url)}}" id="imagen-post" alt="Imagen del post">
         @else
-            <img id="imagen-post" class="img-fluid" src="https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg" alt="">
+            <img id="imagen-post" class="img-fluid" src="https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg" alt="Imagen del post">
         @endisset
     </div>
     <div class="col">

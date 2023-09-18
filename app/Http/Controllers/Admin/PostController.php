@@ -66,12 +66,15 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = Post::create($request->all());
-        
-        $url = Storage::put('/public/posts',$request->file('imagen'));
+      
+        if($request->file('imagen')) {
+            $url = Storage::put('posts',$request->file('imagen'));
 
-        $post->image()->create([
-            'url' => $url
-        ]);
+            $post->image()->create([
+                'url' => $url
+            ]);
+
+        }
 
         PostSaved::dispatch($post);
 
@@ -82,19 +85,6 @@ class PostController extends Controller
         return redirect()->route('admin.post.index')->with(['mensaje' => "Post Creado Correctamente"]);
 
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    
 
     /**
      * Show the form for editing the specified resource.
@@ -124,7 +114,7 @@ class PostController extends Controller
         $post->update($request->all());
         if($request->file('imagen')) {
             //$request->file('imagen')->store('posts' , 'public');
-            $url = Storage::put('public/posts', $request->file('imagen'));
+            $url = Storage::put('posts', $request->file('imagen'));
             if($post->image) {
                 Storage::delete($post->image->url);
 
@@ -133,11 +123,11 @@ class PostController extends Controller
                 ]);
 
                 //Optimización de img
-                $manager = new ImageManager(['driver' => 'imagick']);
-                $image = $manager->make(Storage::get($post->image->url))->widen(600)->encode();
-                dd($image);
+                // $manager = new ImageManager(['driver' => 'imagick']);
+                // $image = $manager->make(Storage::get($post->image->url))->widen(600)->encode();
+                // dd($image);
 
-                Storage::put($post->image->url , (string)$image);
+                // Storage::put($post->image->url , (string)$image);
             } else {
                 $post->image()->create([
                     'url' => $url
