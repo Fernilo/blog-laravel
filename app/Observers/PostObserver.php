@@ -16,6 +16,8 @@ class PostObserver
      */
     public function creating(Post $post)
     {
+        //Al correr los seeders no hay usuario autenticado y se asignan usuarios al azar
+        //por lo tanto esto debe ser validado si se corre desde la consola o no
         if(! \App::runningInConsole()) {
             $post->usuario_id = auth()->user()->id;
         }
