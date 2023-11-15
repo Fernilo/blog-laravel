@@ -75,6 +75,8 @@ class PostController extends Controller
                 'url' => $url
             ]);
 
+            $this->optimizeImage($post->image->url);
+
         }
 
         PostSaved::dispatch($post);
@@ -125,29 +127,15 @@ class PostController extends Controller
                 $post->image->update([
                     'url' => $url
                 ]);
-
-                //Optimización de img
-
-
-                // resize the image to a width of 300 and constrain aspect ratio (auto height)
-       
-                // $img->resize(300, null, function ($constraint) {
-                //     $constraint->aspectRatio();
-                // });
-
-                $image = Image::make(Storage::get($post->image->url));
-                $image->widen(600)->encode();
-                $fileContent = file_get_contents($request->file('imagen')->getRealPath());
-                Storage::put('posts', (string)$image);
-                // $image = $manager->make(Storage::get($post->image->url))->widen(600)->encode();
-                // dd($image);
-
-                // Storage::put($post->image->url , (string)$image);
+               
+            
             } else {
                 $post->image()->create([
                     'url' => $url
                 ]);
             }
+         
+            $this->optimizeImage($post->image->url);
         }
 
         if($request->etiquetas) {
@@ -155,6 +143,16 @@ class PostController extends Controller
         }
 
         return redirect()->route('admin.post.index')->with(['mensaje' => "Post Editado Correctamente"]);
+    }
+
+    private function optimizeImage(string $imgUrl)
+    {
+        $image = Image::make(Storage::get($imgUrl))
+            ->widen(600)
+            ->limitColors(255)
+            ->encode();
+
+        Storage::put($imgUrl, (string)$image);
     }
 
     /**
