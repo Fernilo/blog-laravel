@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Services\PostService;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManager;
+use Intervention\Image\Facades\Image;
 use SplFileInfo;
 
 class PostController extends Controller
@@ -67,13 +67,15 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $post = Post::create($request->all());
-      
+
         if($request->file('imagen')) {
             $url = Storage::put('posts',$request->file('imagen'));
 
             $post->image()->create([
                 'url' => $url
             ]);
+
+            $this->optimizeImage($post->image->url);
 
         }
 
@@ -95,7 +97,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::with('categoria','etiquetas')->find($id);//Con with precargamos las relaciones y 
+        $post = Post::with('categoria','etiquetas')->find($id);//Con with precargamos las relaciones y
         //evitamos nuevas consultas
         $etiquetas = Etiqueta::all();
         $categorias = Categoria::select('id' , 'nombre')->get();
@@ -113,33 +115,44 @@ class PostController extends Controller
     public function update(StorePostRequest $request , Post $post)
     {
         $post->update($request->all());
+
         if($request->file('imagen')) {
-            //$request->file('imagen')->store('posts' , 'public');
+
+
             $url = Storage::put('posts', $request->file('imagen'));
+
             if($post->image) {
                 Storage::delete($post->image->url);
 
                 $post->image->update([
                     'url' => $url
                 ]);
-
-                //Optimización de img
-                // $manager = new ImageManager(['driver' => 'imagick']);
-                // $image = $manager->make(Storage::get($post->image->url))->widen(600)->encode();
-                // dd($image);
-
-                // Storage::put($post->image->url , (string)$image);
+               
+            
             } else {
                 $post->image()->create([
                     'url' => $url
                 ]);
             }
+         
+            $this->optimizeImage($post->image->url);
         }
+
         if($request->etiquetas) {
             $post->etiquetas()->sync($request->etiquetas);
         }
 
         return redirect()->route('admin.post.index')->with(['mensaje' => "Post Editado Correctamente"]);
+    }
+
+    private function optimizeImage(string $imgUrl)
+    {
+        $image = Image::make(Storage::get($imgUrl))
+            ->widen(600)
+            ->limitColors(255)
+            ->encode();
+
+        Storage::put($imgUrl, (string)$image);
     }
 
     /**

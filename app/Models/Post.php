@@ -29,6 +29,7 @@ class Post extends Model
         return $this->morphOne(Imagene::class,'imageable');
     }
 
+    //TODO:Hacer en esto en el observer
     protected static function boot() {
         parent::boot();
 
