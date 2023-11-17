@@ -30,11 +30,11 @@ class Post extends Model
     }
 
     //TODO:Hacer en esto en el observer
-    protected static function boot() {
-        parent::boot();
+    // protected static function boot() {
+    //     parent::boot();
 
-        static::creating(function ($post) {
-            $post->slug = Str::slug($post->titulo);
-        });
-    }
+    //     static::creating(function ($post) {
+    //         $post->slug = Str::slug($post->nombre);
+    //     });
+    // }
 }

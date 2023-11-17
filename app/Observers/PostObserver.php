@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class PostObserver
@@ -21,6 +22,13 @@ class PostObserver
         if(! \App::runningInConsole()) {
             $post->usuario_id = auth()->user()->id;
         }
+
+        $post->slug = Str::slug($post->nombre);
+    }
+
+    public function updating(Post $post)
+    {
+        $post->slug = Str::slug($post->nombre);
     }
 
     /**
