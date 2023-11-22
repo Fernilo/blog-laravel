@@ -13,6 +13,7 @@ use App\Services\PostService;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use SplFileInfo;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -97,8 +98,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        //Podriamos usar findOrFail el cual si hay error una exceptcion de error 404
         $post = Post::with('categoria','etiquetas')->find($id);//Con with precargamos las relaciones y
         //evitamos nuevas consultas
+    
         $etiquetas = Etiqueta::all();
         $categorias = Categoria::select('id' , 'nombre')->get();
 
@@ -163,9 +166,17 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        DB::beginTransaction();
+        try {
+            $post->delete();
 
-        return redirect()->route('admin.post.index')->with(['info' => 'El post ha sido borrada']);
+            DB::commit();
+            return redirect()->route('admin.post.index')->with(['info' => 'El post ha sido borrado']);
+        } catch (\Throwable $th) {
+           DB::rollBack();
+           $th->getMessage();
+        }
+       
     }
 
     /**
