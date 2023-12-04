@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Services\PostService;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image;
 use SplFileInfo;
 use Illuminate\Support\Facades\DB;
 
@@ -76,11 +75,9 @@ class PostController extends Controller
                 'url' => $url
             ]);
 
-            $this->optimizeImage($post->image->url);
-
+            PostSaved::dispatch($post);
         }
 
-        PostSaved::dispatch($post);
 
         if($request->etiquetas) {
             $post->etiquetas()->attach($request->etiquetas);
@@ -138,7 +135,7 @@ class PostController extends Controller
                 ]);
             }
          
-            $this->optimizeImage($post->image->url);
+            PostSaved::dispatch($post);
         }
 
         if($request->etiquetas) {
@@ -146,16 +143,6 @@ class PostController extends Controller
         }
 
         return redirect()->route('admin.post.index')->with(['mensaje' => "Post Editado Correctamente"]);
-    }
-
-    private function optimizeImage(string $imgUrl)
-    {
-        $image = Image::make(Storage::get($imgUrl))
-            ->widen(600)
-            ->limitColors(255)
-            ->encode();
-
-        Storage::put($imgUrl, (string)$image);
     }
 
     /**

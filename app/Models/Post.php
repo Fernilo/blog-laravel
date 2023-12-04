@@ -28,13 +28,4 @@ class Post extends Model
     public function image() {
         return $this->morphOne(Imagene::class,'imageable');
     }
-
-    //TODO:Hacer en esto en el observer
-    // protected static function boot() {
-    //     parent::boot();
-
-    //     static::creating(function ($post) {
-    //         $post->slug = Str::slug($post->nombre);
-    //     });
-    // }
 }
