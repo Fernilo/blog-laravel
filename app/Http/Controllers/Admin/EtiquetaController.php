@@ -17,9 +17,7 @@ class EtiquetaController extends Controller
      */
     public function index()
     {
-        $etiquetas = Etiqueta::all();
-
-        return view('admin.etiquetas.index',compact('etiquetas'));
+        return view('admin.etiquetas.index');
     }
 
     /**

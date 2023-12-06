@@ -34,8 +34,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();//Solo trae los posts del usuario por la validacion en livewire
-        return view('admin.posts.index',[compact('posts'),'states' => $this->states]);
+        return view('admin.posts.index',['states' => $this->states]);
     }
 
     public function searchById(Request $request)
