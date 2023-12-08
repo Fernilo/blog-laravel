@@ -10,6 +10,8 @@ Route::get('/' , [HomeController::class , 'index']);
 Route::get('post/create',[PostController::class , 'create'])->name('post.create');
 Route::post('post/store',[PostController::class , 'store'])->name('post.store');
 Route::get('post/index', [PostController::class , 'index'])->name('admin.post.index');
+Route::get('post/drafts', [PostController::class , 'drafts'])->name('admin.post.drafts');
+Route::get('post/published', [PostController::class , 'published'])->name('admin.post.published');
 Route::delete('post/{post}' , [PostController::class , 'destroy'])->name('post.destroy');
 Route::get('post/edit/{id}' , [PostController::class , 'edit'])->name('post.edit');
 Route::post('post/update/{post}' , [PostController::class , 'update'])->name('post.update');

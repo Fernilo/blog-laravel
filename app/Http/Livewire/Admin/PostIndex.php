@@ -14,6 +14,7 @@ class PostIndex extends Component
 
     public $search;
     public $states;
+    public $status;
 
     public function updatingSearch() 
     {
@@ -21,10 +22,15 @@ class PostIndex extends Component
     }
 
     public function render()
-    {   
+    {
+        $conditions = [
+            ['usuario_id' , auth()->user()->id],
+            ['nombre', 'LIKE' ,'%' .$this->search .'%'],
+            ['estado', $this->status]
+        ];
+
         $posts = Post::orderBy('nombre')
-            ->where('usuario_id' , auth()->user()->id)
-            ->where('nombre', 'LIKE' ,'%' .$this->search .'%')
+            ->where($conditions)
             ->paginate();
       
         return view('livewire.admin.post-index' ,compact('posts') , ['states' => $this->states]);

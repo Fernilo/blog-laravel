@@ -331,8 +331,17 @@ return [
         ],
         [
             'text' => 'Post',
-            'url'  => 'admin/post/index',
-            'icon' => 'fas fa-newspaper',
+            'icon' => 'fas fa-newspaper', 
+            'submenu' => [
+                [
+                    'text' => 'Publicados',
+                    'url'  => 'admin/post/published',
+                ],
+                [
+                    'text' => 'Borrador',
+                    'url'  => 'admin/post/drafts',
+                ]
+            ]
         ],
     ],
 

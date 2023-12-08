@@ -37,6 +37,16 @@ class PostController extends Controller
         return view('admin.posts.index',['states' => $this->states]);
     }
 
+    public function drafts()
+    {
+        return view('admin.posts.drafts',['states' => $this->states]);
+    }
+
+    public function published() 
+    {
+        return view('admin.posts.published',['states' => $this->states]);
+    }
+
     public function searchById(Request $request)
     {
         $posts = $this->postService->searchById($request->input('id'));
@@ -51,6 +61,8 @@ class PostController extends Controller
      */
     public function create()
     {
+        session()->put('previousUrl' , url()->previous());
+
         $categorias = Categoria::select('id' , 'nombre')->get();
         $etiquetas = Etiqueta::all();
 
@@ -82,7 +94,7 @@ class PostController extends Controller
             $post->etiquetas()->attach($request->etiquetas);
         }
 
-        return redirect()->route('admin.post.index')->with(['mensaje' => "Post Creado Correctamente"]);
+        return redirect($request->session()->get('previousUrl'))->with(['mensaje' => "Post Creado Correctamente"]);
 
     }
 
@@ -97,7 +109,8 @@ class PostController extends Controller
         //Podriamos usar findOrFail el cual si hay error una exceptcion de error 404
         $post = Post::with('categoria','etiquetas')->find($id);//Con with precargamos las relaciones y
         //evitamos nuevas consultas
-    
+        session()->put('previousUrl' , url()->previous());
+     
         $etiquetas = Etiqueta::all();
         $categorias = Categoria::select('id' , 'nombre')->get();
 
@@ -112,7 +125,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(StorePostRequest $request , Post $post)
-    {
+    { 
         $post->update($request->all());
 
         if($request->file('imagen')) {
@@ -140,8 +153,8 @@ class PostController extends Controller
         if($request->etiquetas) {
             $post->etiquetas()->sync($request->etiquetas);
         }
-
-        return redirect()->route('admin.post.index')->with(['mensaje' => "Post Editado Correctamente"]);
+       
+        return redirect($request->session()->get('previousUrl'))->with(['mensaje' => "Post Editado Correctamente"]);
     }
 
     /**
@@ -157,7 +170,7 @@ class PostController extends Controller
             $post->delete();
 
             DB::commit();
-            return redirect()->route('admin.post.index')->with(['info' => 'El post ha sido borrado']);
+            return redirect(url()->previous())->with(['info' => 'El post ha sido borrado']);
         } catch (\Throwable $th) {
            DB::rollBack();
            $th->getMessage();
