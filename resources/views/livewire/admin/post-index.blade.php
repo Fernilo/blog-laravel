@@ -38,7 +38,7 @@
                                 @endif
                             </td>
                             <td width=10px>
-                                <form action="{{route('post.destroy',$post)}}" method="POST">
+                                <form action="{{route('post.destroy',$post)}}" method="POST" onsubmit="return confirm('¿Está seguro de eliminar este post?')">
                                     @csrf
                                     @method('delete')
 
