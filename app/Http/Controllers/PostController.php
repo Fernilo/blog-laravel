@@ -17,6 +17,8 @@ class PostController extends Controller
 
     public function show(Post $post) 
     {
+        $this->authorize('published', $post);
+
         $postsRelacionados = Post::where([
                 ['categoria_id' , $post->categoria_id], 
                 ['estado' , 2],

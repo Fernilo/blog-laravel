@@ -109,6 +109,10 @@ class PostController extends Controller
         //Podriamos usar findOrFail el cual si hay error una exceptcion de error 404
         $post = Post::with('categoria','etiquetas')->find($id);//Con with precargamos las relaciones y
         //evitamos nuevas consultas
+
+        //Implementamos policies para impedir que editen posts de otros usuarios
+        $this->authorize('author', $post);
+
         session()->put('previousUrl' , url()->previous());
      
         $etiquetas = Etiqueta::all();
@@ -126,6 +130,9 @@ class PostController extends Controller
      */
     public function update(StorePostRequest $request , Post $post)
     { 
+        //Implementamos policies para impedir que editen posts de otros usuarios
+        $this->authorize('author', $post);
+
         $post->update($request->all());
 
         if($request->file('imagen')) {
@@ -165,6 +172,9 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        //Implementamos policies para impedir que editen posts de otros usuarios
+        $this->authorize('author', $post);
+        
         DB::beginTransaction();
         try {
             $post->delete();
