@@ -5,8 +5,10 @@ window.addEventListener("load" , function() {
                 method:'get'
             })
             .then(response => response.text())
-            .then(html => {
-                document.getElementById("resultados").innerHTML += html
+            .then(html => {console.log(html)
+                resultadosDiv = document.getElementById("resultados");
+                resultadosDiv.innerHTML = "";
+                resultadosDiv.innerHTML += html
             })
             .catch(error => console.log(error))
         } else {

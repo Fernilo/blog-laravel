@@ -1,0 +1,7 @@
+/* Estilos personalizados */
+.link-buscador:hover{
+    background-color: white;
+    display: block;
+    padding: 5px;
+    opacity: 0.9;
+  }
