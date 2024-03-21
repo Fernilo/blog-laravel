@@ -14,7 +14,7 @@ class ImageneFactory extends Factory
     public function definition()
     {
         return [
-            'url' => 'posts/'.$this->faker->image('public/storage/posts' , 640, 480,null, false), //Le paso como parámetros las medidas de las imgs
+            'url' => 'images/'.$this->faker->image('public/storage/images' , 640, 480,null, false), //Le paso como parámetros las medidas de las imgs
         ];
     }
 }

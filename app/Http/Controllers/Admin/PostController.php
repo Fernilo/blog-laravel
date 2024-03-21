@@ -10,12 +10,16 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePostRequest;
 use App\Services\PostService;
+use APP\Traits\PostTrait;
+use App\Traits\SaveImagesTrait;
 use Illuminate\Support\Facades\Storage;
 use SplFileInfo;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+    use SaveImagesTrait;
+
     protected $states = [
         1 => 'Borrador',
         2 => 'Publicado'
@@ -80,15 +84,8 @@ class PostController extends Controller
         $post = Post::create($request->all());
 
         if($request->file('imagen')) {
-            $url = Storage::put('posts',$request->file('imagen'));
-
-            $post->image()->create([
-                'url' => $url
-            ]);
-
-            PostSaved::dispatch($post);
+           $this->SaveImages($request, $post);
         }
-
 
         if($request->etiquetas) {
             $post->etiquetas()->attach($request->etiquetas);
@@ -136,25 +133,7 @@ class PostController extends Controller
         $post->update($request->all());
 
         if($request->file('imagen')) {
-
-
-            $url = Storage::put('posts', $request->file('imagen'));
-
-            if($post->image) {
-                Storage::delete($post->image->url);
-
-                $post->image->update([
-                    'url' => $url
-                ]);
-               
-            
-            } else {
-                $post->image()->create([
-                    'url' => $url
-                ]);
-            }
-         
-            PostSaved::dispatch($post);
+            $this->SaveImages($request, $post);
         }
 
         if($request->etiquetas) {

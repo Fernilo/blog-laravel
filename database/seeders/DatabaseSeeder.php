@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Storage::deleteDirectory('post');//elimina el directorio para asegurarnos de que no repita la creacion de imagenes
-        Storage::makeDirectory('posts');//Crea una carpeta dentro de /storage
+        Storage::deleteDirectory('images');//elimina el directorio para asegurarnos de que no repita la creacion de imagenes
+        Storage::makeDirectory('images');//Crea una carpeta dentro de /storage
 
         $this->call(UserSeeder::class);
         Categoria::factory(4)->create();
