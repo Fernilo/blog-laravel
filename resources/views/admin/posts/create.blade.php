@@ -8,7 +8,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('post.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+        <form action="{{ route('admin.post.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
         @csrf
             @include('admin.posts.partials.form')
 

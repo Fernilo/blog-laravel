@@ -53,7 +53,7 @@ class EtiquetaController extends Controller
     {
         $etiqueta = Etiqueta::create($request->all());
 
-        return redirect()->route('etiquetas.index')->with(['mensaje' => "Etiqueta Creada Correctamente"]);
+        return redirect()->route('admin.etiquetas.index')->with(['mensaje' => "Etiqueta Creada Correctamente"]);
     }
 
     /**
@@ -92,7 +92,7 @@ class EtiquetaController extends Controller
     {
         $etiqueta->update($request->all());
 
-        return redirect()->route('etiquetas.index')->with(['mensaje' => "Etiqueta Editada Correctamente"]);
+        return redirect()->route('admin.etiquetas.index')->with(['mensaje' => "Etiqueta Editada Correctamente"]);
     }
 
     /**
@@ -105,6 +105,6 @@ class EtiquetaController extends Controller
     {
         $etiqueta->delete();
 
-        return redirect()->route('etiquetas.index')->with(['info' => 'La etiqueta ha sido borrada']);
+        return redirect()->route('admin.etiquetas.index')->with(['info' => 'La etiqueta ha sido borrada']);
     }
 }

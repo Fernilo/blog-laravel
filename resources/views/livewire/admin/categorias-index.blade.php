@@ -23,10 +23,10 @@
                             <th scope="row">{{$categoria->id}}</th>
                             <td>{{$categoria->nombre}}</td>
                             <td width=10px>
-                                <a class="btn btn-primary btn-sm" href="{{route('categorias.edit' , $categoria)}}"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{route('admin.categorias.edit' , $categoria)}}"><i class="fas fa-pen"></i></a>
                             </td>
                             <td width=10px>
-                                <form action="{{route('categorias.destroy',$categoria)}}" method="POST">
+                                <form action="{{route('admin.categorias.destroy',$categoria)}}" method="POST">
                                 @csrf
                                 @method('delete')
 

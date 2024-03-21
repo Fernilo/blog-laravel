@@ -4,7 +4,7 @@
 
 @section('content_header')
     <h1>Listado de Post</h1>
-    <a href="{{route('post.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+    <a href="{{route('admin.post.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
 @stop
 
 

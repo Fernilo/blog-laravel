@@ -39,18 +39,7 @@ class CategoriaController extends Controller
     {
         $categoria = Categoria::create($request->all());
         
-        return redirect()->route('categorias.index')->with(["mensaje" => 'Categoría creada correctamente']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return redirect()->route('admin.categorias.index')->with(["mensaje" => 'Categoría creada correctamente']);
     }
 
     /**
@@ -77,7 +66,7 @@ class CategoriaController extends Controller
     {
         $categoria->update($request->all());
 
-        return redirect()->route('categorias.index')->with(['mensaje' => 'Categoria editada correctamente']);
+        return redirect()->route('admin.categorias.index')->with(['mensaje' => 'Categoria editada correctamente']);
     }
 
     /**
@@ -90,6 +79,6 @@ class CategoriaController extends Controller
     {
         $categoria->delete();
 
-        return redirect()->route('categorias.index')->with(['info' => 'la categoría ha sido borrada']);
+        return redirect()->route('admin.categorias.index')->with(['info' => 'la categoría ha sido borrada']);
     }
 }

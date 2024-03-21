@@ -8,7 +8,7 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('etiquetas.store') }}" method="POST" autocomplete="off">
+        <form action="{{ route('admin.etiquetas.store') }}" method="POST" autocomplete="off">
         @csrf
             <div class="form-group">
                 <label for="nombre">Nombre</label>
@@ -32,7 +32,7 @@
                 @enderror
             </div>
 
-            <a href="{{route('etiquetas.index')}}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{route('admin.etiquetas.index')}}" class="btn btn-secondary">Cancelar</a>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
 
