@@ -12,7 +12,7 @@
     
     <div  class="col-sm-8 mt-2">
         <figure style="height:400px;">
-            <img class="w-100 h-100 img-fluid" src="@if($post->image) {{Storage::url( $post->image->url)}} @else https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg @endif" alt="">
+            <img class="w-100 h-100 img-fluid" src="@if($post->image) {{ Storage::url($post->image->url) }} @else https://cdn.pixabay.com/photo/2023/01/30/18/56/island-7756423__340.jpg @endif" alt="">
         </figure>
 
         <div class="fs-6 fw-light lh-base">

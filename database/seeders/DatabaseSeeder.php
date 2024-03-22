@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('images');//elimina el directorio para asegurarnos de que no repita la creacion de imagenes
         Storage::makeDirectory('images');//Crea una carpeta dentro de /storage
 
+        $this->call(RolSeeder::class);
         $this->call(UserSeeder::class);
+
         Categoria::factory(4)->create();
         Etiqueta::factory(8)->create();
         //Post::factory(100)->create();
