@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categoria;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreCategoriasRequest;
 
-class CategoriaController extends Controller
+class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        return view('admin.categorias.index');
+        return view('admin.usuarios.index');
     }
 
     /**
@@ -26,7 +25,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('admin.categorias.create');
+        return view('admin.usuarios.create');
     }
 
     /**
@@ -35,11 +34,11 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCategoriasRequest $request)
+    public function store(Request $request)
     {
-        Categoria::create($request->all());
-        
-        return redirect()->route('admin.categorias.index')->with(["mensaje" => 'Categoría creada correctamente']);
+        User::create($request->all());
+
+        return redirect()->route('admin.usuarios.index')->with(['mensaje' => "Usuario Creado Correctamente"]);
     }
 
     /**
@@ -50,9 +49,8 @@ class CategoriaController extends Controller
      */
     public function edit($id)
     {
-        $categoria = Categoria::find($id);
-
-        return view('admin.categorias.edit' , compact('categoria'));
+        $usuario = User::find($id);
+        return view('admin.usuarios.edit', compact('usuario'));
     }
 
     /**
@@ -62,11 +60,9 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreCategoriasRequest $request,Categoria $categoria)
+    public function update(Request $request, $id)
     {
-        $categoria->update($request->all());
-
-        return redirect()->route('admin.categorias.index')->with(['mensaje' => 'Categoria editada correctamente']);
+        //
     }
 
     /**
@@ -75,10 +71,10 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(User $usuario)
     {
-        $categoria->delete();
+        $usuario->delete();
 
-        return redirect()->route('admin.categorias.index')->with(['info' => 'la categoría ha sido borrada']);
+        return redirect()->route('admin.usuarios.index')->with(['info' => 'El usuario ha sido borrada']);
     }
 }

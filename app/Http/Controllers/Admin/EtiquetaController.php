@@ -51,7 +51,7 @@ class EtiquetaController extends Controller
      */
     public function store(StoreEtiquetasRequest $request)
     {
-        $etiqueta = Etiqueta::create($request->all());
+        Etiqueta::create($request->all());
 
         return redirect()->route('admin.etiquetas.index')->with(['mensaje' => "Etiqueta Creada Correctamente"]);
     }

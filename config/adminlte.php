@@ -343,6 +343,11 @@ return [
                 ]
             ]
         ],
+        [
+            'text' => 'Usuarios',
+            'url'  => 'admin/usuarios/index',
+            'icon' => 'fas fa-users',
+        ],
     ],
 
     /*

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\EtiquetaController;
+use App\Http\Controllers\Admin\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/' , [HomeController::class , 'index'])->name('admin.home.index');
@@ -30,6 +31,13 @@ Route::delete('etiquetas/{etiqueta}' , [EtiquetaController::class , 'destroy'])-
 Route::get('categorias/index' , [CategoriaController::class , 'index'])->name('admin.categorias.index');
 Route::get('categorias/create' , [CategoriaController::class , 'create'])->name('admin.categorias.create');
 Route::post('categorias/store' , [CategoriaController::class , 'store'])->name('admin.categorias.store');
-Route::patch('categorias/update{categoria}' , [CategoriaController::class , 'update'])->name('admin.categorias.update');
+Route::patch('categorias/update/{categoria}' , [CategoriaController::class , 'update'])->name('admin.categorias.update');
 Route::get('categorias/edit/{id}' , [CategoriaController::class , 'edit'])->name('admin.categorias.edit');
 Route::delete('categorias/{categoria}' , [CategoriaController::class , 'destroy'])->name('admin.categorias.destroy');
+
+Route::get('usuarios/index', [UsuarioController::class, 'index'])->name('admin.usuarios.index');
+Route::get('usuarios/create', [UsuarioController::class, 'create'])->name('admin.usuarios.create');
+Route::post('usuarios/store', [UsuarioController::class, 'store'])->name('admin.usuarios.store');
+Route::patch('usuarios/update/{usuario}', [UsuarioController::class, 'update'])->name('admin.usuarios.update');
+Route::get('usuarios/edit/{id}', [UsuarioController::class, 'edit'])->name('admin.usuarios.edit');
+Route::delete('usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('admin.usuarios.destroy');

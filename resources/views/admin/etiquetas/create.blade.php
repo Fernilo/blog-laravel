@@ -20,14 +20,14 @@
             </div>
 
             <div class="form-group">
-                <label for="nombre">Color</label>
+                <label for="color">Color</label>
                 <select name="color" class="form-control" id="">
                     @foreach ($colores as $color)
                         <option value="{{$color}}">{{$color}}</option>
                     @endforeach
                 </select>                
                 
-                @error('nombre')
+                @error('color')
                     <small class="text-danger">{{$message}}</small>
                 @enderror
             </div>
