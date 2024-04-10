@@ -25,7 +25,7 @@ Route::get('etiquetas/index' , [EtiquetaController::class , 'index'])->name('adm
 Route::get('etiquetas/create',[EtiquetaController::class , 'create'])->name('admin.etiquetas.create');
 Route::post('etiquetas/store',[EtiquetaController::class , 'store'])->name('admin.etiquetas.store');
 Route::get('etiquetas/edit/{id}',[EtiquetaController::class , 'edit'])->name('admin.etiquetas.edit');
-Route::post('etiquetas/update/{etiqueta}',[EtiquetaController::class , 'update'])->name('admin.etiquetas.update');
+Route::patch('etiquetas/update/{etiqueta}',[EtiquetaController::class , 'update'])->name('admin.etiquetas.update');
 Route::delete('etiquetas/{etiqueta}' , [EtiquetaController::class , 'destroy'])->name('admin.etiquetas.destroy');
 
 Route::get('categorias/index' , [CategoriaController::class , 'index'])->name('admin.categorias.index');

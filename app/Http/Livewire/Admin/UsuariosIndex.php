@@ -16,15 +16,17 @@ class UsuariosIndex extends Component
 
     public function updatingSearch() 
     {
-        $this->resetPage();//Elimina el parametro get de la paginacion en la URL
+        $this->resetPage();//Elimina el parametro get de la paginacion en la URL (?page=7)
     }
 
     public function render()
     {
-        $usuarios = User::where('name', 'LIKE' ,'%' .$this->search .'%')
+        $usuarios = User::with('roles')
+            ->where('name', 'LIKE' ,'%' .$this->search .'%')
+            ->orWhere('email', 'LIKE' ,'%' .$this->search .'%')
             ->latest('id')
             ->paginate();
-      
+
         return view('livewire.admin.usuarios-index' , compact('usuarios'));
     }
 }

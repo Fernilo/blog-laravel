@@ -9,6 +9,7 @@
 <div class="card">
     <div class="card-body">
         <form action="{{ route('admin.etiquetas.update' , $etiqueta) }}" method="POST" autocomplete="off">
+        @method('patch')
         @csrf
             <div class="form-group">
                 <label for="nombre">Nombre</label>

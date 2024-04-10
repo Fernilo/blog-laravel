@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
@@ -49,20 +50,24 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        $usuario = User::find($id);
-        return view('admin.usuarios.edit', compact('usuario'));
+        $roles = Role::all();
+
+        $usuario = User::with('roles')->find($id);
+        return view('admin.usuarios.edit', compact('usuario','roles'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  object $usuario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $usuario)
     {
-        //
+        $usuario->roles()->sync($request->rol);
+
+        return redirect()->route('admin.usuarios.index')->with([['mensaje' => "Usuario Editado Correctamente"]]);
     }
 
     /**
