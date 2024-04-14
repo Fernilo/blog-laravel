@@ -4,7 +4,9 @@
 
 @section('content_header')
     <h1>Listado de Etiquetas</h1>
-    <a href="{{route('admin.etiquetas.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+    @can('admin.etiquetas.create')
+    <a href="{{route('admin.etiquetas.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Agregar etiqueta</a>
+    @endcan
 @stop
 
 @section('content')

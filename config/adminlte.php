@@ -323,15 +323,18 @@ return [
             'text' => 'Categorías',
             'url'  => 'admin/categorias/index',
             'icon' => 'fas fa-hashtag',
+            'can' => 'admin.categorias.index'
         ],
         [
             'text' => 'Etiquetas',
             'url'  => 'admin/etiquetas/index',
             'icon' => 'fas fa-tags',
+            'can' => 'admin.etiquetas.index'
         ],
         [
             'text' => 'Post',
             'icon' => 'fas fa-newspaper', 
+            'can' => 'admin.posts.index',
             'submenu' => [
                 [
                     'text' => 'Publicados',
@@ -347,6 +350,7 @@ return [
             'text' => 'Usuarios',
             'url'  => 'admin/usuarios/index',
             'icon' => 'fas fa-users',
+            'can' => 'admin.usuarios.index'
         ],
     ],
 

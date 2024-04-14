@@ -4,7 +4,9 @@
 
 @section('content_header')
     <h1>Listado de Categorías</h1>
-    <a href="{{route('admin.categorias.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+    @can('admin.categorias.create')
+    <a href="{{route('admin.categorias.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Agregar Categoría</a>
+    @endcan
 @stop
 
 @section('content')

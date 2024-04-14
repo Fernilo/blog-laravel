@@ -25,15 +25,19 @@
                             <td>{{$etiqueta->nombre}}</td>
                             <td>{{$etiqueta->color}}</td>
                             <td width=10px>
+                                @can('admin.etiquetas.edit')
                                 <a class="btn btn-primary btn-sm" href="{{route('admin.etiquetas.edit' , $etiqueta)}}"><i class="fas fa-pen"></i></a>
+                                @endcan
                             </td>
                             <td width=10px>
+                                @can('admin.etiquetas.destroy')
                                 <form action="{{route('admin.etiquetas.destroy',$etiqueta)}}" method="POST">
                                     @csrf
                                     @method('delete')
 
                                     <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>                                    
                                 </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

@@ -4,7 +4,8 @@
 
 @section('content_header')
     <h1>Listado de Posts en Borrador</h1>
-    <a href="{{route('admin.post.create')}}" class="btn btn-success"><i class="fas fa-plus"></i></a>
+    <!-- TODO:Ver de reutilizar esto en otros modulos -->
+    <a href="{{route('admin.post.create')}}" class="btn btn-success"><i class="fas fa-plus"></i> Nuevo Post</a>
 @stop
 
 

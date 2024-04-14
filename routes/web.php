@@ -21,9 +21,6 @@ Route::get('/', [PostController::class , 'index' ])
 Route::get('/posts/{post}' , [PostController::class , 'show'])
     ->name('post.show');
 
-// Route::get('/admin', [HomeController::class , 'index'])
-//     ->name('home.admin');
-
 Route::get('/categoria/{categoria}' , [PostController::class , 'categoria'])
     ->name('post.categoria');
 
