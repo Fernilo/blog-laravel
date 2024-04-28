@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\EtiquetaController;
 use App\Http\Controllers\Admin\UsuarioController;
+use App\Http\Controllers\Admin\RolController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/' , [HomeController::class , 'index'])->name('admin.home.index');
@@ -41,3 +42,5 @@ Route::post('usuarios/store', [UsuarioController::class, 'store'])->middleware('
 Route::patch('usuarios/update/{usuario}', [UsuarioController::class, 'update'])->middleware('can:admin.usuarios.update')->name('admin.usuarios.update');
 Route::get('usuarios/edit/{id}', [UsuarioController::class, 'edit'])->middleware('can:admin.usuarios.edit')->name('admin.usuarios.edit');
 Route::delete('usuarios/{usuario}', [UsuarioController::class, 'destroy'])->middleware('can:admin.usuarios.destroy')->name('admin.usuarios.destroy');
+
+Route::resource('roles/index', RolController::class)->names('admin.roles');

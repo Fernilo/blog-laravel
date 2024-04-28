@@ -352,6 +352,12 @@ return [
             'icon' => 'fas fa-users',
             'can' => 'admin.usuarios.index'
         ],
+        [
+            'text' => 'Roles',
+            'url'  => 'admin/roles/index',
+            'icon' => 'fas fa-users-cog',
+            // 'can' => 'admin.usuarios.index'
+        ],
     ],
 
     /*
