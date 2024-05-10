@@ -18,15 +18,17 @@ El proyecto se puede levantar mediante [Sail](https://laravel.com/docs/8.x/sail)
 ```bash
    git clone git@github.com:Fernilo/blog-laravel.git
 
+   cd blog-laravel
+
    composer install
 
    cp .env.example .env
 
-   sail up
-
-   sail artisan key:generate
+   sail up -d
 
    sail artisan migrate --seed
+
+   sail artisan key:generate
 ```
 
 ## Autores
