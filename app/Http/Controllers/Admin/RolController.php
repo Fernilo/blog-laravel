@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRolRequest;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -36,9 +38,12 @@ class RolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRolRequest $request)
     {
-        //
+        $rol = Role::create(['name' => $request->name]);
+        $rol->permissions()->sync($request->permissions);
+
+        return redirect()->route('admin.roles.index')->with(['mensaje' => 'Rol creado correctamente']);
     }
 
     /**
@@ -60,6 +65,7 @@ class RolController extends Controller
      */
     public function edit(Role $rol)
     {
+        dd($rol);
         return view('admin.roles.edit', compact('rol'));
     }
 
