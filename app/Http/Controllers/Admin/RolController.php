@@ -63,10 +63,13 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $rol)
+    public function edit($id)
     {
-        dd($rol);
-        return view('admin.roles.edit', compact('rol'));
+        $rol = Role::find($id);
+      
+        $permissions = Permission::all();
+        
+        return view('admin.roles.edit', compact('rol', 'permissions'));
     }
 
     /**

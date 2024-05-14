@@ -43,4 +43,9 @@ Route::patch('usuarios/update/{usuario}', [UsuarioController::class, 'update'])-
 Route::get('usuarios/edit/{id}', [UsuarioController::class, 'edit'])->middleware('can:admin.usuarios.edit')->name('admin.usuarios.edit');
 Route::delete('usuarios/{usuario}', [UsuarioController::class, 'destroy'])->middleware('can:admin.usuarios.destroy')->name('admin.usuarios.destroy');
 
-Route::resource('roles/index', RolController::class)->names('admin.roles');
+Route::get('roles/index', [RolController::class, 'index'])->middleware('can:admin.roles.index')->name('admin.roles.index');
+Route::get('roles/create', [RolController::class, 'create'])->middleware('can:admin.roles.create')->name('admin.roles.create');
+Route::post('roles/store', [RolController::class, 'store'])->middleware('can:admin.roles.store')->name('admin.roles.store');
+Route::patch('roles/update/{usuario}', [RolController::class, 'update'])->middleware('can:admin.roles.update')->name('admin.roles.update');
+Route::get('roles/edit/{id}', [RolController::class, 'edit'])->middleware('can:admin.roles.edit')->name('admin.roles.edit');
+Route::delete('roles/{usuario}', [RolController::class, 'destroy'])->middleware('can:admin.roles.destroy')->name('admin.roles.destroy');

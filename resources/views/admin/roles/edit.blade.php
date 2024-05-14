@@ -8,13 +8,14 @@
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('admin.roles.update') }}" method="POST" autocomplete="off">
+        <form action="{{ route('admin.roles.update', $rol) }}" method="POST" autocomplete="off">
+        @method('patch')
         @csrf
             <div class="form-group">
                 <label for="name">Nombre</label>
-                <input type="text" name="name" class="form-control" id="name" aria-describedby="codigoHelp">
+                <input type="text" name="name" value="{{ $rol->name }}" class="form-control" id="name">
                 
-                @error('nombre')
+                @error('name')
                     <small class="text-danger">{{$message}}</small>
                 @enderror
             </div>
@@ -24,7 +25,6 @@
                 <div>
                     <label for=""><input type="checkbox" class="mr-2" name="" id="{{$permission->id}}">{{$permission->description}}</label>
                 </div>
-                
             @endforeach
 
             <a href="{{route('admin.roles.index')}}" class="btn btn-secondary">Cancelar</a>
