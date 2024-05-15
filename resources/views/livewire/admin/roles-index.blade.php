@@ -23,19 +23,19 @@
                             <th scope="row">{{$rol->id}}</th>
                             <td>{{$rol->name}}</td>
                             <td width=10px>
-                                {{-- @can('admin.roles.edit') --}}
+                                @can('admin.roles.edit')
                                 <a class="btn btn-primary btn-sm" href="{{route('admin.roles.edit' , $rol)}}"><i class="fas fa-pen"></i></a>
-                                {{-- @endcan --}}
+                                @endcan
                             </td>
                             <td width=10px>
-                                {{-- @can('admin.roles.destroy') --}}
+                                @can('admin.roles.destroy')
                                 <form action="{{route('admin.roles.destroy',$rol)}}" method="POST">
                                     @csrf
                                     @method('delete')
 
                                     <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>                                    
                                 </form>
-                                {{-- @endcan --}}
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

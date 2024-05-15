@@ -23,7 +23,9 @@
             <h2>Lista de Permisos</h2>
             @foreach ($permissions as $permission)
                 <div>
-                    <label for=""><input type="checkbox" class="mr-2" name="" id="{{$permission->id}}">{{$permission->description}}</label>
+                    <label for=""><input type="checkbox" value="{{$permission->id}}" @foreach ($rol->permissions as $permissionRol)
+                        @if ($permissionRol->id === $permission->id) checked @endif
+                    @endforeach  class="mr-2" name="permissions[]" id="{{$permission->id}}">{{$permission->description}}</label>
                 </div>
             @endforeach
 

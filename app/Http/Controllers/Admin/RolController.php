@@ -65,10 +65,10 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-        $rol = Role::find($id);
+        $rol = Role::with('permissions')->find($id);
       
         $permissions = Permission::all();
-        
+       
         return view('admin.roles.edit', compact('rol', 'permissions'));
     }
 
@@ -81,7 +81,11 @@ class RolController extends Controller
      */
     public function update(Request $request, Role $rol)
     {
-        
+        $rol->update($request->all());
+
+        $rol->permissions()->sync($request->permissions);
+
+        return redirect()->route('admin.roles.index')->with(['mensaje' => 'Rol editado correctamente']);
     }
 
     /**
