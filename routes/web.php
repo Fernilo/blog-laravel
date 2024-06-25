@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,7 @@ Route::get('/etiqueta/{etiqueta}' , [PostController::class , 'etiqueta'])
 
 Route::get('/post/buscador' , [PostController::class , 'buscador'])
     ->name('post.buscador');
+
+Route::get('/test-exception', TestController::class);
 
 require __DIR__.'/auth.php';
