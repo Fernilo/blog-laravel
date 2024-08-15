@@ -14,10 +14,11 @@ use APP\Traits\PostTrait;
 use App\Traits\SaveImagesTrait;
 use Illuminate\Support\Facades\Storage;
 use SplFileInfo;
-use Illuminate\Support\Facades\DB;
+use App\Traits\LogTrait;
 
 class PostController extends Controller
 {
+    use LogTrait;
     use SaveImagesTrait;
 
     protected $states = [
@@ -149,22 +150,32 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
-    {
-        //Implementamos policies para impedir que editen posts de otros usuarios
-        $this->authorize('author', $post);
+    // public function destroy(Post $post)
+    // {
+    //     //Implementamos policies para impedir que editen posts de otros usuarios
+    //     $this->authorize('author', $post);
         
-        DB::beginTransaction();
-        try {
-            $post->delete();
+    //     DB::beginTransaction();
+    //     try {
+    //         $post->delete();
 
-            DB::commit();
-            return redirect(url()->previous())->with(['info' => 'El post ha sido borrado']);
-        } catch (\Throwable $th) {
-           DB::rollBack();
-           $th->getMessage();
-        }
+    //         DB::commit();
+    //         return redirect(url()->previous())->with(['info' => 'El post ha sido borrado']);
+    //     } catch (\Throwable $th) {
+    //        DB::rollBack();
+    //        $th->getMessage();
+    //     }
        
+    // }
+
+    public function destroy (Post $post) 
+    {
+        $postDeleted = $post->replicate();
+        if($post->delete()) {
+            $this->writeLog('Post borrado: '. $postDeleted->name);
+            return redirect()->route('admin.post.index')->with(['mensaje' => 'El post ha sido borrada', 'type' => 'success']);
+        }
+        return redirect()->route('admin.post.index')->with(['error' => 'Error al borrar el post , intente nuevamente', 'type' => 'error']);
     }
 
     /**

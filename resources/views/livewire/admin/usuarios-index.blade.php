@@ -1,11 +1,6 @@
 <div class="card">
     @if ($usuarios->count())
         <div class="card-body">
-            @if(session('info'))
-                <div class="alert-success p-3 mb-3 ">
-                    <p>{{session('info')}}</p>
-                </div>
-            @endif
             <div class="card-header">
                 <input wire:model="search" type="text" class="form-control" placeholder="Nombre de la etiqueta">
             </div>

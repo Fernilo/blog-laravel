@@ -77,8 +77,11 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        $categoria->delete();
-
-        return redirect()->route('admin.categorias.index')->with(['info' => 'la categoría ha sido borrada']);
+        $categoryDeleted = $categoria->replicate();
+        if($categoria->delete()) {
+            $this->writeLog('Usuario borrado: '. $categoryDeleted->name);
+            return redirect()->route('admin.categorias.index')->with(['mensaje' => 'la categoría ha sido borrada', 'type' => 'success']);
+        }
+        return redirect()->route('admin.categorias.index')->with(['mensaje' => 'Error, intente nuevamente', 'type' => 'error']);
     }
 }

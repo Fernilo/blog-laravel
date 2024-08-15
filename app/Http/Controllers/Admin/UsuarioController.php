@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Traits\LogTrait;
 
 class UsuarioController extends Controller
 {
+    use LogTrait;
     /**
      * Display a listing of the resource.
      *
@@ -78,8 +80,11 @@ class UsuarioController extends Controller
      */
     public function destroy(User $usuario)
     {
-        $usuario->delete();
-
-        return redirect()->route('admin.usuarios.index')->with(['info' => 'El usuario ha sido borrada']);
+        $userDeleted = $usuario->replicate();
+        if($usuario->delete()) {
+            $this->writeLog('Usuario borrado: '. $userDeleted->name);
+            return redirect()->route('admin.usuarios.index')->with(['mensaje' => 'El usuario ha sido borrada']);
+        }
+        return redirect()->route('admin.usuarios.index')->with(['error' => 'Error al borrar el usuario , intente nuevamente']);
     }
 }

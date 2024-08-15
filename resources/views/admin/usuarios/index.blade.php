@@ -15,5 +15,10 @@
             <p>{{session('mensaje')}}</p>
         </div>
     @endif
+    @if(session('error'))
+        <div class="alert-danger p-3 mb-3 ">
+            <p>{{session('error')}}</p>
+        </div>
+    @endif
     @livewire('admin.usuarios-index')
 @stop

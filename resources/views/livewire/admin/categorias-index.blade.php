@@ -32,7 +32,6 @@
                                 <form action="{{route('admin.categorias.destroy',$categoria)}}" method="POST">
                                 @csrf
                                 @method('delete')
-
                                     <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>                                    
                                 </form>
                                 @endcan
