@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Etiqueta;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreEtiquetasRequest;
+use App\Traits\LogTrait;
 
 
 class EtiquetaController extends Controller
 {
+    use LogTrait;
     /**
      * Display a listing of the resource.
      *
@@ -103,8 +105,14 @@ class EtiquetaController extends Controller
      */
     public function destroy(Etiqueta $etiqueta)
     {
-        $etiqueta->delete();
+        $etiquetaDeleted = $etiqueta->replicate();
+        
+        if($etiqueta->delete()) {
+        
+            $this->writeLog('Etiqueta borrada: '. $etiquetaDeleted->nombre);
+            return redirect()->route('admin.etiquetas.index')->with(['info' => 'La etiqueta ha sido borrada', 'type' => 'success']);
+        }
 
-        return redirect()->route('admin.etiquetas.index')->with(['info' => 'La etiqueta ha sido borrada']);
+        return redirect()->route('admin.etiquetas.index')->with(['mensaje' => 'Error, intente nuevamente', 'type' => 'error']);
     }
 }

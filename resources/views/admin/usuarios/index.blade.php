@@ -11,14 +11,7 @@
 
 @section('content')
     @if(session('mensaje'))
-        <div class="alert-success p-3 mb-3 ">
-            <p>{{session('mensaje')}}</p>
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="alert-danger p-3 mb-3 ">
-            <p>{{session('error')}}</p>
-        </div>
+    <x-alert type="{{ session('type') }}" :message="session('mensaje')"/>
     @endif
     @livewire('admin.usuarios-index')
 @stop

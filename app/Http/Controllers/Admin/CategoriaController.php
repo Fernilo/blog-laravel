@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
-use Illuminate\Http\Request;
+use App\Traits\LogTrait;
 use App\Http\Requests\StoreCategoriasRequest;
 
 class CategoriaController extends Controller
 {
+    use LogTrait;
     /**
      * Display a listing of the resource.
      *
@@ -78,8 +79,10 @@ class CategoriaController extends Controller
     public function destroy(Categoria $categoria)
     {
         $categoryDeleted = $categoria->replicate();
+        
         if($categoria->delete()) {
-            $this->writeLog('Usuario borrado: '. $categoryDeleted->name);
+        
+            $this->writeLog('Categoria borrada: '. $categoryDeleted->nombre);
             return redirect()->route('admin.categorias.index')->with(['mensaje' => 'la categoría ha sido borrada', 'type' => 'success']);
         }
         return redirect()->route('admin.categorias.index')->with(['mensaje' => 'Error, intente nuevamente', 'type' => 'error']);

@@ -28,7 +28,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('admin.usuarios.create');
+        $roles = Role::all();
+
+        return view('admin.usuarios.create',compact('roles'));
     }
 
     /**
@@ -39,7 +41,9 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
+        $usuario = User::create($request->all());
+
+        $usuario->roles()->sync($request->rol);
 
         return redirect()->route('admin.usuarios.index')->with(['mensaje' => "Usuario Creado Correctamente"]);
     }
@@ -83,8 +87,8 @@ class UsuarioController extends Controller
         $userDeleted = $usuario->replicate();
         if($usuario->delete()) {
             $this->writeLog('Usuario borrado: '. $userDeleted->name);
-            return redirect()->route('admin.usuarios.index')->with(['mensaje' => 'El usuario ha sido borrada']);
+            return redirect()->route('admin.usuarios.index')->with(['mensaje' => 'El usuario ha sido borrada', 'type' => 'success']);
         }
-        return redirect()->route('admin.usuarios.index')->with(['error' => 'Error al borrar el usuario , intente nuevamente']);
+        return redirect()->route('admin.usuarios.index')->with(['mensaje' => 'Error al borrar el usuario , intente nuevamente', 'type' => 'danger']);
     }
 }

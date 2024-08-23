@@ -3,12 +3,12 @@
 @section('title', 'Blog Laravel')
 
 @section('content_header')
-    <h1>Editar Categoria</h1>
+    <h1>Editar Categoría</h1>
 @stop
 @section('content')
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('categorias.update' , $categoria) }}" method="POST" autocomplete="off">
+        <form action="{{ route('admin.categorias.update' , $categoria) }}" method="POST" autocomplete="off">
         @method('patch')
         @csrf
             <div class="form-group">
@@ -19,7 +19,7 @@
                     <small class="text-danger">{{$message}}</small>
                 @enderror
             </div>
-            <a href="{{route('categorias.index')}}" class="btn btn-secondary">Cancelar</a>
+            <a href="{{route('admin.categorias.index')}}" class="btn btn-secondary">Cancelar</a>
             <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
 

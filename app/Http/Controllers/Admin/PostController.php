@@ -28,6 +28,7 @@ class PostController extends Controller
 
     private $postService;
 
+    // Patron de diseño inyección de dependencias
     public function __construct(PostService $postService)
     {
         $this->postService = $postService;
@@ -54,9 +55,9 @@ class PostController extends Controller
 
     public function searchById(Request $request)
     {
-        $posts = $this->postService->searchById($request->input('id'));
+        $post = $this->postService->searchById($request->input('id'));
 
-        return view('admin.posts.index',[compact('posts'),'states' => $this->states]);
+        return view('admin.posts.search',['post' => $post ,'states' => $this->states]);
     }
 
     /**

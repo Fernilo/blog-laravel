@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Log;
 
 trait LogTrait
 {
-    public function writeLog($message) 
+    public function writeLog(string $message) 
     {
         Log::info($message);
     }

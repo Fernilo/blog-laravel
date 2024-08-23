@@ -3,7 +3,7 @@
 @section('title', 'Blog Laravel')
 
 @section('content_header')
-    <h1>Nueva Categoria</h1>
+    <h1>Nueva Categoría</h1>
 @stop
 @section('content')
 <div class="card">
